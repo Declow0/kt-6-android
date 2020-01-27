@@ -8,7 +8,7 @@ class Post(
     var content: String
 ) {
     val id: UUID = UUID.randomUUID()
-    val createTime: LocalDateTime = LocalDateTime.now()
+    var createTime: LocalDateTime = LocalDateTime.now()
     private var views: Long = 0L
 
     var favorite: Long = 0L

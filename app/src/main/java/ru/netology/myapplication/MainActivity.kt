@@ -6,7 +6,9 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.netology.model.Post
-import java.time.format.DateTimeFormatter
+import ru.netology.service.Period
+import ru.netology.service.constructText
+import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,14 +16,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val post = Post("Netology", "First post in our network!")
-        post.comment = 10
-        post.share = 20
+        val post = Post("Netology Group Company", "В чащах юга жил-был цитрус? Да, но фальшивый экземпляръ!")
+        post.createTime = LocalDateTime.now().minus(2L, Period.DAYS.chronoUnit)
+
+        post.favorite = 2
+        post.comment = 0
+        post.share = 10
+        post.changeFavorite()
 //        post.changeComment()
-//        post.changeFavorite()
 //        post.changeShare()
 
-        timestamp.text = post.createTime.format(DateTimeFormatter.ofPattern("dd MMMM uuuu"))
+        timestamp.text = constructText(post.createTime)
         userName.text = post.usedName
         postContent.text = post.content
 
