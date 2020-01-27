@@ -18,10 +18,11 @@ class MainActivity : AppCompatActivity() {
         post.comment = 10
         post.share = 20
 //        post.changeComment()
-        post.changeFavorite()
+//        post.changeFavorite()
 //        post.changeShare()
 
         timestamp.text = post.createTime.format(DateTimeFormatter.ofPattern("dd MMMM uuuu"))
+        userName.text = post.usedName
         postContent.text = post.content
 
         val isVisible = { text: CharSequence ->
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
             favoriteCount.setTextColor(Color.parseColor("#F06292"))
         } else {
             favoriteIcon.setBackgroundResource(R.drawable.ic_favorite)
-            favoriteCount.setTextColor(-1979711488)
+            favoriteCount.setTextColor(Color.parseColor("#999999"))
         }
 
         commentCount.text = post.comment.toString()
@@ -49,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             commentCount.setTextColor(Color.parseColor("#2196F3"))
         } else {
             commentIcon.setBackgroundResource(R.drawable.ic_chat_bubble)
-            commentCount.setTextColor(-1979711488)
+            commentCount.setTextColor(Color.parseColor("#999999"))
         }
 
         shareCount.text = post.share.toString()
@@ -59,7 +60,7 @@ class MainActivity : AppCompatActivity() {
             shareCount.setTextColor(Color.parseColor("#4CAF50"))
         } else {
             shareIcon.setBackgroundResource(R.drawable.ic_share)
-            shareCount.setTextColor(-1979711488)
+            shareCount.setTextColor(Color.parseColor("#999999"))
         }
     }
 }
