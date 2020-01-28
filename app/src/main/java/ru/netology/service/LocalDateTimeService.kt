@@ -3,7 +3,7 @@ package ru.netology.service
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
-fun beforeNowMessage(timeFrom: LocalDateTime): String {
+fun intervalBetweenNowMessage(timeFrom: LocalDateTime): String {
     val now = LocalDateTime.now()
 
     val (period, amount) = betweenInterval(timeFrom, now)

@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.netology.model.Post
 import ru.netology.service.Period
-import ru.netology.service.beforeNowMessage
+import ru.netology.service.intervalBetweenNowMessage
 import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        createTime.text = beforeNowMessage(post.createTime)
+        createTime.text = intervalBetweenNowMessage(post.createTime)
         userName.text = post.createdUser
         postContent.text = post.content
 
