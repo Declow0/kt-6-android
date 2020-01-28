@@ -120,12 +120,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(
                 Intent().apply {
                     action = Intent.ACTION_VIEW
-                    if (post.location != null) {
-                        data =
-                            Uri.parse("geo:${post.location?.first},${post.location?.second}?z=19")
-                    } else if (post.address.isNotBlank()) {
-                        data = Uri.parse("geo:0,0?q=1600+${post.address}")
-                    }
+                    data = Uri.parse(
+                        "geo:" +
+                                if (post.location != null) "${post.location?.first},${post.location?.second}" else "0,0" +
+                                        if (post.address.isNotBlank()) "?q=${Uri.encode(post.address)}" else ""
+                    )
                 }
             )
         }
