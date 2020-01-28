@@ -1,5 +1,6 @@
 package ru.netology.model
 
+import android.net.Uri
 import java.time.LocalDateTime
 
 data class Post(
@@ -16,5 +17,7 @@ data class Post(
     val commentCurrentUser: Boolean = false,
 
     val address: String = "",
-    val location: Pair<Double, Double>? = null
+    val location: Pair<Double, Double>? = null,
+
+    val interactiveContent: Uri? = null
 )

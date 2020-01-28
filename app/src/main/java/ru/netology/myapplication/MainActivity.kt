@@ -23,8 +23,9 @@ class MainActivity : AppCompatActivity() {
         2,
         0,
         10,
-        location = 55.7765289 to 37.6749378
-//        address = "ул. Нижняя Красносельская"
+        location = 55.7765289 to 37.6749378,
+//        address = "ул. Нижняя Красносельская",
+        interactiveContent = Uri.parse("https://www.youtube.com/watch?v=WhWc3b3KhnY")
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -128,6 +129,21 @@ class MainActivity : AppCompatActivity() {
                 }
             )
         }
+
+        interactive.visibility =
+            if (post.interactiveContent != null) {
+                View.VISIBLE
+            } else {
+                View.GONE
+            }
+        interactive.setOnClickListener {
+            startActivity(
+                Intent().apply {
+                    action = Intent.ACTION_VIEW
+                    data = post.interactiveContent
+                }
+            )
+        }
     }
 
     private fun updateCountView(
@@ -136,7 +152,11 @@ class MainActivity : AppCompatActivity() {
     ) {
         if (view is TextView) {
             view.text = count.toString()
-            view.visibility = if (count > 0) View.VISIBLE else View.INVISIBLE
+            view.visibility =
+                if (count > 0)
+                    View.VISIBLE
+                else
+                    View.INVISIBLE
         }
     }
 }
