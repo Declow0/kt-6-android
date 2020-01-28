@@ -1,55 +1,17 @@
 package ru.netology.model
 
 import java.time.LocalDateTime
-import java.util.*
 
-class Post(
-    val usedName: String,
-    var content: String
-) {
-    val id: UUID = UUID.randomUUID()
-    var createTime: LocalDateTime = LocalDateTime.now()
-    private var views: Long = 0L
+data class Post(
+    val createdUser: String,
+    val content: String,
+    val createTime: LocalDateTime = LocalDateTime.now(),
 
-    var favorite: Long = 0L
-    var favoriteByMe: Boolean = false
-        private set
-    var share: Long = 0L
-    var shareByMe: Boolean = false
-        private set
-    var comment: Long = 0L
-    var commentByMe: Boolean = false
-        private set
+    val favorite: Long = 0L,
+    val share: Long = 0L,
+    val comment: Long = 0L,
 
-    fun incViews() = views++
-
-    fun changeFavorite() {
-        favoriteByMe = if (!favoriteByMe) {
-            favorite++
-            true
-        } else {
-            favorite--
-            false
-        }
-    }
-
-    fun changeShare() {
-        shareByMe = if (!shareByMe) {
-            share++
-            true
-        } else {
-            share--
-            false
-        }
-    }
-
-    fun changeComment() {
-        commentByMe = if (!commentByMe) {
-            comment++
-            true
-        } else {
-            comment--
-            false
-        }
-    }
-}
+    val favoriteCurrentUser: Boolean = false,
+    val shareCurrentUser: Boolean = false,
+    val commentCurrentUser: Boolean = false
+)

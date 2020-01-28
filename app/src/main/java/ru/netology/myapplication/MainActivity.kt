@@ -3,69 +3,118 @@ package ru.netology.myapplication
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import ru.netology.model.Post
 import ru.netology.service.Period
-import ru.netology.service.constructText
+import ru.netology.service.beforeNowMessage
 import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
+
+    var post = Post(
+        "Netology Group Company",
+        "В чащах юга жил-был цитрус? Да, но фальшивый экземпляръ!",
+        LocalDateTime.now().minus(2L, Period.DAYS.chronoUnit),
+        2,
+        0,
+        10
+    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val post = Post("Netology Group Company", "В чащах юга жил-был цитрус? Да, но фальшивый экземпляръ!")
-        post.createTime = LocalDateTime.now().minus(2L, Period.DAYS.chronoUnit)
-
-        post.favorite = 2
-        post.comment = 0
-        post.share = 10
-        post.changeFavorite()
-//        post.changeComment()
-//        post.changeShare()
-
-        timestamp.text = constructText(post.createTime)
-        userName.text = post.usedName
+        createTime.text = beforeNowMessage(post.createTime)
+        userName.text = post.createdUser
         postContent.text = post.content
 
-        val isVisible = { text: CharSequence ->
-            if (text == "0" || text.isBlank()) {
-                View.INVISIBLE
-            } else {
-                View.VISIBLE
+
+        updateCountView(favoriteCount, post.favorite)
+        favoriteIcon.setOnClickListener { view ->
+            if (view is ImageButton) {
+                if (post.favoriteCurrentUser) {
+                    post = post.copy(
+                        favorite = post.favorite - 1,
+                        favoriteCurrentUser = false
+                    )
+
+                    updateCountView(favoriteCount, post.favorite)
+                    favoriteIcon.setBackgroundResource(R.drawable.ic_favorite)
+                    favoriteCount.setTextColor(Color.parseColor("#999999"))
+                } else {
+                    post = post.copy(
+                        favorite = post.favorite + 1,
+                        favoriteCurrentUser = true
+                    )
+
+                    updateCountView(favoriteCount, post.favorite)
+                    favoriteIcon.setBackgroundResource(R.drawable.ic_favorite_active)
+                    favoriteCount.setTextColor(Color.parseColor("#F06292"))
+                }
             }
         }
 
-        favoriteCount.text = post.favorite.toString()
-        favoriteCount.visibility = isVisible(favoriteCount.text)
-        if (post.favoriteByMe) {
-            favoriteIcon.setBackgroundResource(R.drawable.ic_favorite_active)
-            favoriteCount.setTextColor(Color.parseColor("#F06292"))
-        } else {
-            favoriteIcon.setBackgroundResource(R.drawable.ic_favorite)
-            favoriteCount.setTextColor(Color.parseColor("#999999"))
+        updateCountView(commentCount, post.comment)
+        commentIcon.setOnClickListener { view ->
+            if (view is ImageButton) {
+                if (post.commentCurrentUser) {
+                    post = post.copy(
+                        comment = post.comment - 1,
+                        commentCurrentUser = false
+                    )
+
+                    updateCountView(commentCount, post.comment)
+                    commentIcon.setBackgroundResource(R.drawable.ic_chat_bubble)
+                    commentCount.setTextColor(Color.parseColor("#999999"))
+                } else {
+                    post = post.copy(
+                        comment = post.comment + 1,
+                        commentCurrentUser = true
+                    )
+
+                    updateCountView(commentCount, post.comment)
+                    commentIcon.setBackgroundResource(R.drawable.ic_chat_bubble_active)
+                    commentCount.setTextColor(Color.parseColor("#2196F3"))
+                }
+            }
         }
 
-        commentCount.text = post.comment.toString()
-        commentCount.visibility = isVisible(commentCount.text)
-        if (post.commentByMe) {
-            commentIcon.setBackgroundResource(R.drawable.ic_chat_bubble_active)
-            commentCount.setTextColor(Color.parseColor("#2196F3"))
-        } else {
-            commentIcon.setBackgroundResource(R.drawable.ic_chat_bubble)
-            commentCount.setTextColor(Color.parseColor("#999999"))
-        }
+        updateCountView(shareCount, post.share)
+        shareIcon.setOnClickListener { view ->
+            if (view is ImageButton) {
+                if (post.shareCurrentUser) {
+                    post = post.copy(
+                        share = post.share - 1,
+                        shareCurrentUser = false
+                    )
 
-        shareCount.text = post.share.toString()
-        shareCount.visibility = isVisible(shareCount.text)
-        if (post.shareByMe) {
-            shareIcon.setBackgroundResource(R.drawable.ic_share_active)
-            shareCount.setTextColor(Color.parseColor("#4CAF50"))
-        } else {
-            shareIcon.setBackgroundResource(R.drawable.ic_share)
-            shareCount.setTextColor(Color.parseColor("#999999"))
+                    updateCountView(shareCount, post.share)
+                    shareIcon.setBackgroundResource(R.drawable.ic_share)
+                    shareCount.setTextColor(Color.parseColor("#999999"))
+                } else {
+                    post = post.copy(
+                        share = post.share + 1,
+                        shareCurrentUser = true
+                    )
+
+                    updateCountView(shareCount, post.share)
+                    shareIcon.setBackgroundResource(R.drawable.ic_share_active)
+                    shareCount.setTextColor(Color.parseColor("#4CAF50"))
+                }
+            }
+        }
+    }
+
+    private fun updateCountView(
+        view: View,
+        count: Long
+    ) {
+        if (view is TextView) {
+            view.text = count.toString()
+            view.visibility = if (count > 0) View.VISIBLE else View.INVISIBLE
         }
     }
 }

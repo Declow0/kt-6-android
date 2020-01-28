@@ -11,50 +11,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:paddingBottom="16dp"
         android:background="@android:color/background_light"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/header"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        <ImageButton
+            android:id="@+id/avatar"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_margin="16dp"
+            android:background="@drawable/ic_avatar"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"></ImageButton>
 
-            <ImageButton
-                android:id="@+id/avatar"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:background="@drawable/ic_avatar"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></ImageButton>
+        <TextView
+            android:id="@+id/createTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="4dp"
+            android:textColor="#999999"
+            android:textSize="10sp"
+            app:layout_constraintStart_toEndOf="@id/avatar"
+            app:layout_constraintTop_toTopOf="@id/avatar"
+            tools:text="20 декабря 2019"></TextView>
 
-            <TextView
-                android:id="@+id/timestamp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:layout_marginVertical="4dp"
-                app:layout_constraintStart_toEndOf="@id/avatar"
-                app:layout_constraintTop_toTopOf="parent"
-                android:textSize="10sp"
-                android:textColor="#999999"
-                tools:text="20 декабря 2019"></TextView>
-
-            <TextView
-                android:id="@+id/userName"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="8dp"
-                app:layout_constraintStart_toEndOf="@id/avatar"
-                app:layout_constraintTop_toBottomOf="@id/timestamp"
-                android:textColor="#000000"
-                android:ellipsize="end"
-                android:singleLine="true"
-                tools:text="Netsdfsdfsdfskdfksdgjfgsidgfusgdfuygsdufygsdfsdfsdfsdfsdfology"></TextView>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textColor="#000000"
+            app:layout_constraintStart_toEndOf="@id/avatar"
+            app:layout_constraintTop_toBottomOf="@id/createTime"
+            tools:text="Netsdfsdfsdfskdfksdgjfgsidgfusgdfuygsdufygsdfsdfsdfsdfsdfology"></TextView>
 
         <TextView
             android:id="@+id/postContent"
@@ -64,79 +57,68 @@
             android:layout_marginVertical="8dp"
             android:textColor="#000000"
             android:textSize="18sp"
-            app:layout_constraintTop_toBottomOf="@id/header"
+            app:layout_constraintTop_toBottomOf="@id/avatar"
             tools:text="Моё первое сообщение"></TextView>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/shareCount"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginVertical="0dp"
-            android:paddingVertical="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/postContent">
+            android:layout_marginHorizontal="8dp"
+            android:textColor="#999999"
+            app:layout_constraintBottom_toBottomOf="@id/shareIcon"
+            app:layout_constraintStart_toEndOf="@id/shareIcon"
+            tools:text="15"></TextView>
 
-            <TextView
-                android:id="@+id/shareCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                app:layout_constraintBottom_toBottomOf="@id/shareIcon"
-                app:layout_constraintStart_toEndOf="@id/shareIcon"
-                app:layout_constraintTop_toTopOf="parent"
-                android:textColor="#999999"
-                tools:text="15"></TextView>
+        <ImageButton
+            android:id="@+id/shareIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginVertical="16dp"
+            android:background="@drawable/ic_share"
+            app:layout_constraintEnd_toEndOf="@id/postContent"
+            app:layout_constraintTop_toBottomOf="@id/postContent"></ImageButton>
 
-            <ImageButton
-                android:id="@+id/shareIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="32dp"
-                android:background="@drawable/ic_share"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></ImageButton>
+        <TextView
+            android:id="@+id/commentCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:textColor="#999999"
+            app:layout_constraintBottom_toBottomOf="@id/commentIcon"
+            app:layout_constraintStart_toEndOf="@id/commentIcon"
+            tools:text="18"></TextView>
 
-            <TextView
-                android:id="@+id/commentCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                app:layout_constraintBottom_toBottomOf="@id/commentIcon"
-                app:layout_constraintStart_toEndOf="@id/commentIcon"
-                app:layout_constraintTop_toTopOf="parent"
-                android:textColor="#999999"
-                tools:text="18"></TextView>
+        <ImageButton
+            android:id="@+id/commentIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginVertical="16dp"
+            android:background="@drawable/ic_chat_bubble"
+            app:layout_constraintEnd_toStartOf="@id/shareIcon"
+            app:layout_constraintTop_toBottomOf="@id/postContent"></ImageButton>
 
-            <ImageButton
-                android:id="@+id/commentIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="32dp"
-                android:background="@drawable/ic_chat_bubble"
-                app:layout_constraintEnd_toStartOf="@id/shareIcon"
-                app:layout_constraintTop_toTopOf="parent"></ImageButton>
+        <TextView
+            android:id="@+id/favoriteCount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:textColor="#999999"
+            app:layout_constraintBottom_toBottomOf="@id/favoriteIcon"
+            app:layout_constraintStart_toEndOf="@id/favoriteIcon"
+            tools:text="16"></TextView>
 
-            <TextView
-                android:id="@+id/favoriteCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                app:layout_constraintBottom_toBottomOf="@id/favoriteIcon"
-                app:layout_constraintStart_toEndOf="@id/favoriteIcon"
-                app:layout_constraintTop_toTopOf="parent"
-                android:textColor="#999999"
-                tools:text="16"></TextView>
-
-            <ImageButton
-                android:id="@+id/favoriteIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="32dp"
-                android:background="@drawable/ic_favorite"
-                app:layout_constraintEnd_toStartOf="@id/commentIcon"
-                app:layout_constraintTop_toTopOf="parent"></ImageButton>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <ImageButton
+            android:id="@+id/favoriteIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginVertical="16dp"
+            android:background="@drawable/ic_favorite"
+            app:layout_constraintEnd_toStartOf="@id/commentIcon"
+            app:layout_constraintTop_toBottomOf="@id/postContent"></ImageButton>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

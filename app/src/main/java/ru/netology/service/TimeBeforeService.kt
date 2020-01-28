@@ -3,24 +3,24 @@ package ru.netology.service
 import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
-fun constructText(timeFrom: LocalDateTime): String {
-    val timeTo = LocalDateTime.now()
+fun beforeNowMessage(timeFrom: LocalDateTime): String {
+    val now = LocalDateTime.now()
 
-    val between = calcBetween(timeFrom, timeTo)
-    val wordForm = calcWordForm(between.second)
+    val (period, amount) = betweenInterval(timeFrom, now)
+    val wordForm = wordFormForNumber(amount)
 
-    return if (between.first == Period.SECONDS) {
+    return if (period == Period.SECONDS) {
         "менее "
     } else {
-        if (between.second == 1L) {
+        if (amount == 1L) {
             ""
         } else {
-            "${between.second} "
+            "$amount "
         }
-    } + "${between.first.wordForm(wordForm)} назад"
+    } + "${period.wordForm(wordForm)} назад"
 }
 
-fun calcWordForm(value: Long): WordForm {
+private fun wordFormForNumber(value: Long): WordForm {
     return when (value % 10L) {
         1L -> if (value % 100L == 11L) WordForm.THIRD else WordForm.FIRST
         2L, 3L, 4L -> if (value % 100L in 12L..14L) WordForm.THIRD else WordForm.SECOND
@@ -28,7 +28,7 @@ fun calcWordForm(value: Long): WordForm {
     }
 }
 
-fun calcBetween(
+private fun betweenInterval(
         from: LocalDateTime,
         to: LocalDateTime
 ): Pair<Period, Long> {
