@@ -1,6 +1,8 @@
 package ru.netology.myapplication
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
@@ -20,7 +22,9 @@ class MainActivity : AppCompatActivity() {
         LocalDateTime.now().minus(2L, Period.DAYS.chronoUnit),
         2,
         0,
-        10
+        10,
+        location = 55.7765289 to 37.6749378
+//        address = "ул. Нижняя Красносельская"
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,6 +109,25 @@ class MainActivity : AppCompatActivity() {
                     shareCount.setTextColor(Color.parseColor("#4CAF50"))
                 }
             }
+        }
+
+        geolocation.visibility =
+            if (post.location != null || post.address.isNotBlank())
+                View.VISIBLE
+            else
+                View.INVISIBLE
+        geolocation.setOnClickListener {
+            startActivity(
+                Intent().apply {
+                    action = Intent.ACTION_VIEW
+                    if (post.location != null) {
+                        data =
+                            Uri.parse("geo:${post.location?.first},${post.location?.second}?z=19")
+                    } else if (post.address.isNotBlank()) {
+                        data = Uri.parse("geo:0,0?q=1600+${post.address}")
+                    }
+                }
+            )
         }
     }
 

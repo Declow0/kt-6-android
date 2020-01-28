@@ -13,5 +13,8 @@ data class Post(
 
     val favoriteCurrentUser: Boolean = false,
     val shareCurrentUser: Boolean = false,
-    val commentCurrentUser: Boolean = false
+    val commentCurrentUser: Boolean = false,
+
+    val address: String = "",
+    val location: Pair<Double, Double>? = null
 )
