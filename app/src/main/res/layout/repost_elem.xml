@@ -84,6 +84,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/youtube"></ImageButton>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/repost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/commercial"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        tools:itemCount="1"
+        tools:listitem="@layout/inner_elem"
+        ></androidx.recyclerview.widget.RecyclerView>
+
     <TextView
         android:id="@+id/shareCount"
         android:layout_width="wrap_content"
@@ -102,7 +114,7 @@
         android:layout_marginVertical="16dp"
         android:background="@drawable/ic_share"
         app:layout_constraintEnd_toEndOf="@id/postContent"
-        app:layout_constraintTop_toBottomOf="@id/commercial"></ImageButton>
+        app:layout_constraintTop_toBottomOf="@id/repost"></ImageButton>
 
     <TextView
         android:id="@+id/commentCount"
@@ -122,7 +134,7 @@
         android:layout_marginVertical="16dp"
         android:background="@drawable/ic_chat_bubble"
         app:layout_constraintEnd_toStartOf="@id/shareIcon"
-        app:layout_constraintTop_toBottomOf="@id/commercial"></ImageButton>
+        app:layout_constraintTop_toBottomOf="@id/repost"></ImageButton>
 
     <TextView
         android:id="@+id/favoriteCount"
@@ -142,6 +154,6 @@
         android:layout_marginVertical="16dp"
         android:background="@drawable/ic_favorite"
         app:layout_constraintEnd_toStartOf="@id/commentIcon"
-        app:layout_constraintTop_toBottomOf="@id/commercial"></ImageButton>
+        app:layout_constraintTop_toBottomOf="@id/repost"></ImageButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

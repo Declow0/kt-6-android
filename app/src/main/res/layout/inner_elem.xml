@@ -84,64 +84,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/youtube"></ImageButton>
 
-    <TextView
-        android:id="@+id/shareCount"
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/repost"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:textColor="#999999"
-        app:layout_constraintBottom_toBottomOf="@id/shareIcon"
-        app:layout_constraintStart_toEndOf="@id/shareIcon"
-        tools:text="15"></TextView>
-
-    <ImageButton
-        android:id="@+id/shareIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginVertical="16dp"
-        android:background="@drawable/ic_share"
-        app:layout_constraintEnd_toEndOf="@id/postContent"
-        app:layout_constraintTop_toBottomOf="@id/commercial"></ImageButton>
-
-    <TextView
-        android:id="@+id/commentCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:textColor="#999999"
-        app:layout_constraintBottom_toBottomOf="@id/commentIcon"
-        app:layout_constraintStart_toEndOf="@id/commentIcon"
-        tools:text="18"></TextView>
-
-    <ImageButton
-        android:id="@+id/commentIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginVertical="16dp"
-        android:background="@drawable/ic_chat_bubble"
-        app:layout_constraintEnd_toStartOf="@id/shareIcon"
-        app:layout_constraintTop_toBottomOf="@id/commercial"></ImageButton>
-
-    <TextView
-        android:id="@+id/favoriteCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:textColor="#999999"
-        app:layout_constraintBottom_toBottomOf="@id/favoriteIcon"
-        app:layout_constraintStart_toEndOf="@id/favoriteIcon"
-        tools:text="16"></TextView>
-
-    <ImageButton
-        android:id="@+id/favoriteIcon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="32dp"
-        android:layout_marginVertical="16dp"
-        android:background="@drawable/ic_favorite"
-        app:layout_constraintEnd_toStartOf="@id/commentIcon"
-        app:layout_constraintTop_toBottomOf="@id/commercial"></ImageButton>
-
+        app:layout_constraintTop_toBottomOf="@id/commercial"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        tools:listitem="@layout/inner_elem"
+        tools:itemCount="0"
+        ></androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>
