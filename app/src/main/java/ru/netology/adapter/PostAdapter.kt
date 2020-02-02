@@ -36,6 +36,15 @@ class PostAdapter(val postList: MutableList<Post>) : RecyclerView.Adapter<Recycl
 class PostViewHolder(private val adapter: PostAdapter, itemView: View) : RecyclerView.ViewHolder(itemView) {
     init {
         with(itemView) {
+            this.setOnLongClickListener {
+                if (adapterPosition != RecyclerView.NO_POSITION) {
+                    adapter.postList.removeAt(adapterPosition)
+                    adapter.notifyDataSetChanged()
+                }
+
+                true
+            }
+
             favoriteIcon.setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION) {
                     var post = adapter.postList[adapterPosition]
