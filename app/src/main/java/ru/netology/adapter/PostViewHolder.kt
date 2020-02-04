@@ -2,17 +2,23 @@ package ru.netology.adapter
 
 import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
 import android.view.View
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.post_elem.view.*
 import ru.netology.model.Post
-import ru.netology.model.PostType
 import ru.netology.myapplication.R
-import ru.netology.service.intervalBetweenNowMessage
 import java.time.format.DateTimeFormatter
 
-class PostViewHolder(postAdapter: PostAdapter, view: View) : BaseViewHolder(postAdapter, view) {
+open class PostViewHolder(postAdapter: PostAdapter, view: View) :
+    BaseViewHolder(postAdapter, view) {
+    private val favoriteIcon: ImageButton = itemView.findViewById(R.id.favoriteIcon)
+    private val favoriteCount: TextView = itemView.findViewById(R.id.favoriteCount)
+    private val commentIcon: ImageButton = itemView.findViewById(R.id.commentIcon)
+    private val commentCount: TextView = itemView.findViewById(R.id.commentCount)
+    private val shareIcon: ImageButton = itemView.findViewById(R.id.shareIcon)
+    private val shareCount: TextView = itemView.findViewById(R.id.shareCount)
+
     init {
         with(itemView) {
             this.setOnLongClickListener {
@@ -29,8 +35,8 @@ class PostViewHolder(postAdapter: PostAdapter, view: View) : BaseViewHolder(post
                     var post = adapter.postList[adapterPosition]
 
                     post = post.copy(
-                            favorite = if (post.favoriteCurrentUser) post.favorite - 1 else post.favorite + 1,
-                            favoriteCurrentUser = !post.favoriteCurrentUser
+                        favorite = if (post.favoriteCurrentUser) post.favorite - 1 else post.favorite + 1,
+                        favoriteCurrentUser = !post.favoriteCurrentUser
                     )
                     adapter.postList[adapterPosition] = post
                     adapter.notifyItemChanged(adapterPosition)
@@ -41,11 +47,10 @@ class PostViewHolder(postAdapter: PostAdapter, view: View) : BaseViewHolder(post
                 if (adapterPosition != RecyclerView.NO_POSITION) {
                     var post = adapter.postList[adapterPosition]
 
-                    post =
-                            post.copy(
-                                    comment = if (post.commentCurrentUser) post.comment - 1 else post.comment + 1,
-                                    commentCurrentUser = !post.commentCurrentUser
-                            )
+                    post = post.copy(
+                        comment = if (post.commentCurrentUser) post.comment - 1 else post.comment + 1,
+                        commentCurrentUser = !post.commentCurrentUser
+                    )
                     adapter.postList[adapterPosition] = post
                     adapter.notifyItemChanged(adapterPosition)
                 }
@@ -56,21 +61,22 @@ class PostViewHolder(postAdapter: PostAdapter, view: View) : BaseViewHolder(post
                     var post = adapter.postList[adapterPosition]
 
                     if (!post.shareCurrentUser) {
-                        post =
-                                post.copy(
-                                        share = post.share + 1,
-                                        shareCurrentUser = true
-                                )
+                        post = post.copy(
+                            share = post.share + 1,
+                            shareCurrentUser = true
+                        )
 
                         context.startActivity(
-                                Intent().apply {
-                                    action = Intent.ACTION_SEND
-                                    putExtra(
-                                            Intent.EXTRA_TEXT,
-                                            "${post.createdUser} (${post.createTime.format(DateTimeFormatter.ofPattern("dd MMMM uuuu"))})\n" + post.content
-                                    )
-                                    type = "text/plain"
-                                }
+                            Intent().apply {
+                                action = Intent.ACTION_SEND
+                                putExtra(
+                                    Intent.EXTRA_TEXT,
+                                    "${post.createdUser} (${post.createTime.format(
+                                        DateTimeFormatter.ofPattern("dd MMMM uuuu")
+                                    )})\n" + post.content
+                                )
+                                type = "text/plain"
+                            }
                         )
 
                         adapter.postList[adapterPosition] = post
@@ -78,106 +84,36 @@ class PostViewHolder(postAdapter: PostAdapter, view: View) : BaseViewHolder(post
                     }
                 }
             }
-
-            geolocation.setOnClickListener {
-                if (adapterPosition != RecyclerView.NO_POSITION) {
-                    val post = adapter.postList[adapterPosition]
-
-                    context.startActivity(
-                            Intent().apply {
-                                action = Intent.ACTION_VIEW
-                                data = Uri.parse(
-                                        "geo:" +
-                                                if (post.location != null) "${post.location.latitude},${post.location.longitude}" else "0,0" +
-                                                        if (post.address.isNotBlank()) "?q=${Uri.encode(post.address)}" else ""
-                                )
-                            }
-                    )
-                }
-            }
-
-            youtube.setOnClickListener {
-                if (adapterPosition != RecyclerView.NO_POSITION) {
-                    val post = adapter.postList[adapterPosition]
-                    context.startActivity(
-                            Intent().apply {
-                                action = Intent.ACTION_VIEW
-                                data = Uri.parse("https://www.youtube.com/watch?v=${post.youtubeId}")
-                            }
-                    )
-                }
-            }
-
-            commercial.setOnClickListener {
-                if (adapterPosition != RecyclerView.NO_POSITION) {
-                    val post = adapter.postList[adapterPosition]
-                    context.startActivity(
-                            Intent().apply {
-                                action = Intent.ACTION_VIEW
-                                data = post.commercialContent
-                            }
-                    )
-                }
-            }
         }
     }
 
     override fun bind(post: Post) {
-        with(itemView) {
-            if (post.type.contains(PostType.COMMERCIAL)) {
-                createTime.text = "Рекламная запись"
-            } else {
-                createTime.text = intervalBetweenNowMessage(post.createTime)
-            }
-            userName.text = post.createdUser
-            postContent.text = post.content
+        super.bind(post)
+        bindCountView(favoriteCount, post.favorite)
+        if (post.favoriteCurrentUser) {
+            favoriteIcon.setBackgroundResource(R.drawable.ic_favorite_active)
+            favoriteCount.setTextColor(Color.parseColor("#F06292"))
+        } else {
+            favoriteIcon.setBackgroundResource(R.drawable.ic_favorite)
+            favoriteCount.setTextColor(Color.parseColor("#999999"))
+        }
 
-            bindCountView(favoriteCount, post.favorite)
-            if (post.favoriteCurrentUser) {
-                favoriteIcon.setBackgroundResource(R.drawable.ic_favorite_active)
-                favoriteCount.setTextColor(Color.parseColor("#F06292"))
-            } else {
-                favoriteIcon.setBackgroundResource(R.drawable.ic_favorite)
-                favoriteCount.setTextColor(Color.parseColor("#999999"))
-            }
+        bindCountView(commentCount, post.comment)
+        if (post.commentCurrentUser) {
+            commentIcon.setBackgroundResource(R.drawable.ic_chat_bubble_active)
+            commentCount.setTextColor(Color.parseColor("#2196F3"))
+        } else {
+            commentIcon.setBackgroundResource(R.drawable.ic_chat_bubble)
+            commentCount.setTextColor(Color.parseColor("#999999"))
+        }
 
-            bindCountView(commentCount, post.comment)
-            if (post.commentCurrentUser) {
-                commentIcon.setBackgroundResource(R.drawable.ic_chat_bubble_active)
-                commentCount.setTextColor(Color.parseColor("#2196F3"))
-            } else {
-                commentIcon.setBackgroundResource(R.drawable.ic_chat_bubble)
-                commentCount.setTextColor(Color.parseColor("#999999"))
-            }
-
-            bindCountView(shareCount, post.share)
-            if (post.shareCurrentUser) {
-                shareIcon.setBackgroundResource(R.drawable.ic_share_active)
-                shareCount.setTextColor(Color.parseColor("#4CAF50"))
-            } else {
-                shareIcon.setBackgroundResource(R.drawable.ic_share)
-                shareCount.setTextColor(Color.parseColor("#999999"))
-            }
-
-            if (post.type.contains(PostType.GEO_EVENT)) {
-                geolocation.visibility = View.VISIBLE
-            } else {
-                geolocation.visibility = View.INVISIBLE
-            }
-
-            if (post.type.contains(PostType.YOUTUBE)) {
-                youtube.visibility = View.VISIBLE
-//                var url = URL("http://img.youtube.com/vi/${post.youtubeId}/maxresdefault.jpg")
-//                interactive.background = Drawable.createFromStream()
-            } else {
-                youtube.visibility = View.GONE
-            }
-
-            if (post.type.contains(PostType.COMMERCIAL)) {
-                commercial.visibility = View.VISIBLE
-            } else {
-                commercial.visibility = View.GONE
-            }
+        bindCountView(shareCount, post.share)
+        if (post.shareCurrentUser) {
+            shareIcon.setBackgroundResource(R.drawable.ic_share_active)
+            shareCount.setTextColor(Color.parseColor("#4CAF50"))
+        } else {
+            shareIcon.setBackgroundResource(R.drawable.ic_share)
+            shareCount.setTextColor(Color.parseColor("#999999"))
         }
     }
 }

@@ -29,16 +29,16 @@ private fun wordFormForNumber(value: Long): WordForm {
 }
 
 private fun betweenInterval(
-        from: LocalDateTime,
-        to: LocalDateTime
+    from: LocalDateTime,
+    to: LocalDateTime
 ): Pair<Period, Long> {
     Period.values()
-            .sortedArrayDescending()
-            .forEach {
-                val between = it.chronoUnit.between(from, to)
-                if (between > 0)
-                    return Pair(it, between)
-            }
+        .sortedArrayDescending()
+        .forEach {
+            val between = it.chronoUnit.between(from, to)
+            if (between > 0)
+                return Pair(it, between)
+        }
     return Pair(Period.SECONDS, 0L)
 }
 

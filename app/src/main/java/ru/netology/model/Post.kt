@@ -5,26 +5,26 @@ import java.time.LocalDateTime
 import java.util.*
 
 data class Post(
-        val createdUser: String,
-        val content: String,
-        val createTime: LocalDateTime = LocalDateTime.now(),
+    val createdUser: String,
+    val content: String,
+    val createTime: LocalDateTime = LocalDateTime.now(),
 
-        val favorite: Long = 0L,
-        val share: Long = 0L,
-        val comment: Long = 0L,
+    val favorite: Long = 0L,
+    val share: Long = 0L,
+    val comment: Long = 0L,
 
-        val favoriteCurrentUser: Boolean = false,
-        val shareCurrentUser: Boolean = false,
-        val commentCurrentUser: Boolean = false,
+    val favoriteCurrentUser: Boolean = false,
+    val shareCurrentUser: Boolean = false,
+    val commentCurrentUser: Boolean = false,
 
-        val address: String = "",
-        val location: Location? = null,
+    val address: String = "",
+    val location: Location? = null,
 
-        val youtubeId: String? = null,
-        val commercialContent: Uri? = null,
-        val original: UUID? = null,
-        val id: UUID = UUID.randomUUID(),
-        val inner: Boolean = false
+    val youtubeId: String? = null,
+    val commercialContent: Uri? = null,
+    val original: UUID? = null,
+    val id: UUID = UUID.randomUUID(),
+    val inner: Boolean = false
 ) {
     val type: Set<PostType>
         get() {
