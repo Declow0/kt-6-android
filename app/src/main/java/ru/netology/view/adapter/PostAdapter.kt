@@ -1,4 +1,4 @@
-package ru.netology.adapter
+package ru.netology.view.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -88,10 +88,9 @@
         android:id="@+id/repost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/commercial"
         app:layout_constraintStart_toStartOf="parent"
-        tools:itemCount="0"
-        ></androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@id/commercial"
+        tools:itemCount="0"></androidx.recyclerview.widget.RecyclerView>
 
     <TextView
         android:id="@+id/shareCount"

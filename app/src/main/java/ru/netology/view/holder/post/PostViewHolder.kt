@@ -7,7 +7,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.activity.R
-import ru.netology.adapter.PostAdapter
+import ru.netology.view.adapter.PostAdapter
 import ru.netology.model.Post
 import java.time.format.DateTimeFormatter
 

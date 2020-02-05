@@ -15,25 +15,25 @@ val repository: PostRepository = PostRepository()
 
 class PostRepository {
     private var isInit = false
-    private val repository = HashMap<UUID, Post>()
+    private val cachedPosts = HashMap<UUID, Post>()
 
     suspend fun getList(): MutableList<Post> {
         if (!isInit) {
             init()
         }
 
-        return repository
+        return cachedPosts
             .values
             .sortedByDescending { it.createTime }
             .toMutableList()
     }
 
     fun get(uuid: UUID?): Post? {
-        return repository[uuid]
+        return cachedPosts[uuid]
     }
 
     private suspend fun init() {
-        repository.putAll(
+        cachedPosts.putAll(
             HttpClient {
                 install(JsonFeature) {
                     acceptContentTypes = listOf(
@@ -46,7 +46,7 @@ class PostRepository {
                 }
             }
                 .get<List<Post>>(postUrl)
-                // Workaround for default values
+                // Workaround for initializing default values
                 .map {
                     Post(
                         createdUser = it.createdUser,

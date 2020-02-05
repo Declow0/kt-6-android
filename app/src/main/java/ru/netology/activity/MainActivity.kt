@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
-import ru.netology.adapter.PostAdapter
+import ru.netology.view.adapter.PostAdapter
 import ru.netology.model.Post
 import ru.netology.repository.repository
 

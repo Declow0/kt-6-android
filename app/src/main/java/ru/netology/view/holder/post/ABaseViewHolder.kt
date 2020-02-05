@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.activity.R
-import ru.netology.adapter.PostAdapter
+import ru.netology.view.adapter.PostAdapter
 import ru.netology.model.Post
 import ru.netology.model.PostType
 import ru.netology.repository.repository
