@@ -1,18 +1,33 @@
 package ru.netology.model
 
 import android.net.Uri
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.JsonAdapter
+import com.google.gson.annotations.SerializedName
+import ru.netology.deserializer.LocalDateTimeDeserializer
 import java.time.LocalDateTime
 import java.util.*
 
 data class Post(
+    @SerializedName("author")
+    @Expose
     val createdUser: String,
+
+    @SerializedName("content")
+    @Expose
     val content: String,
+
+    @SerializedName("created")
+    @JsonAdapter(LocalDateTimeDeserializer::class)
+    @Expose
     val createTime: LocalDateTime = LocalDateTime.now(),
 
     val favorite: Long = 0L,
     val share: Long = 0L,
     val comment: Long = 0L,
 
+    @SerializedName("likedByMe")
+    @Expose
     val favoriteCurrentUser: Boolean = false,
     val shareCurrentUser: Boolean = false,
     val commentCurrentUser: Boolean = false,

@@ -5,7 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.model.Post
 import ru.netology.model.PostType
-import ru.netology.myapplication.R
+import ru.netology.activity.R
+import ru.netology.view.holder.post.ABaseViewHolder
+import ru.netology.view.holder.post.InnerViewHolder
+import ru.netology.view.holder.post.PostViewHolder
+import ru.netology.view.holder.post.RepostViewHolder
 
 open class PostAdapter(val postList: MutableList<Post>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -41,6 +45,6 @@ open class PostAdapter(val postList: MutableList<Post>) :
         }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is BaseViewHolder) holder.bind(postList[position])
+        if (holder is ABaseViewHolder) holder.bind(postList[position])
     }
 }

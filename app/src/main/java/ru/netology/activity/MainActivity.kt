@@ -1,13 +1,15 @@
-package ru.netology.myapplication
+package ru.netology.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.*
 import ru.netology.adapter.PostAdapter
+import ru.netology.model.Post
 import ru.netology.repository.repository
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,7 +17,13 @@ class MainActivity : AppCompatActivity() {
 
         with(container) {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = PostAdapter(repository.getList())
+            launch {
+                var list = mutableListOf<Post>()
+                withContext(Dispatchers.IO) {
+                    list = repository.getList()
+                }
+                adapter = PostAdapter(list)
+            }
         }
     }
 }

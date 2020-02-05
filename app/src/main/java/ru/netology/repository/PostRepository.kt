@@ -1,88 +1,63 @@
 package ru.netology.repository
 
-import android.net.Uri
+import io.ktor.client.HttpClient
+import io.ktor.client.features.json.GsonSerializer
+import io.ktor.client.features.json.JsonFeature
+import io.ktor.client.request.get
+import io.ktor.http.ContentType
 import ru.netology.model.Post
-import ru.netology.model.x
-import ru.netology.service.Period
-import java.time.LocalDateTime
 import java.util.*
 import kotlin.collections.HashMap
 
+const val postUrl =
+    "https://raw.githubusercontent.com/netology-code/bkt-code/master/coroutines/posts.json"
 val repository: PostRepository = PostRepository()
 
-class PostRepository() {
+class PostRepository {
+    private var isInit = false
     private val repository = HashMap<UUID, Post>()
 
-    init {
-        put(
-            Post(
-                "Netology Group Company",
-                "В чащах юга жил-был цитрус? Да, но фальшивый экземпляръ!",
-                LocalDateTime.now().minus(10L, Period.MINUTES.chronoUnit),
-                2,
-                0,
-                10,
-                location = 55.7765289 x 37.6749378,
-                youtubeId = "WhWc3b3KhnY"
-            )
-        )
+    suspend fun getList(): MutableList<Post> {
+        if (!isInit) {
+            init()
+        }
 
-        put(
-            Post(
-                "JKH",
-                "Новое сообщение",
-                LocalDateTime.now().minus(2L, Period.DAYS.chronoUnit),
-                0,
-                14,
-                10,
-                commentCurrentUser = true
-            )
-        )
-
-        put(
-            Post(
-                "Google",
-                "Используйте наш поиск",
-                LocalDateTime.now().minus(1L, Period.DAYS.chronoUnit),
-                50,
-                14,
-                6,
-                commercialContent = Uri.parse("https://google.com")
-            )
-        )
-
-        val repost = Post(
-            "RePoster",
-            "Украл пост",
-            LocalDateTime.now().minus(1L, Period.MINUTES.chronoUnit),
-            0,
-            14,
-            10,
-            original = repository.keys.first()
-        )
-        put(repost)
-
-        put(
-            Post(
-                "ReRePoster",
-                "Украл украденный пост",
-                LocalDateTime.now().minus(1L, Period.MINUTES.chronoUnit),
-                0,
-                14,
-                10,
-                original = repost.id
-            )
-        )
-    }
-
-    fun getList(): MutableList<Post> = repository.values.sortedByDescending { it.createTime }.toMutableList()
-
-    fun put(post: Post): Post {
-        repository[post.id] = post
-        return post
+        return repository
+            .values
+            .sortedByDescending { it.createTime }
+            .toMutableList()
     }
 
     fun get(uuid: UUID?): Post? {
         return repository[uuid]
+    }
+
+    private suspend fun init() {
+        repository.putAll(
+            HttpClient {
+                install(JsonFeature) {
+                    acceptContentTypes = listOf(
+                        ContentType.Text.Plain,
+                        ContentType.Application.Json
+                    )
+                    serializer = GsonSerializer {
+                        excludeFieldsWithoutExposeAnnotation()
+                    }
+                }
+            }
+                .get<List<Post>>(postUrl)
+                // Workaround for default values
+                .map {
+                    Post(
+                        createdUser = it.createdUser,
+                        content = it.content,
+                        createTime = it.createTime,
+                        favoriteCurrentUser = it.favoriteCurrentUser
+                    )
+                }
+                .map { it.id to it }
+                .toMap()
+        )
+        isInit = true
     }
 }

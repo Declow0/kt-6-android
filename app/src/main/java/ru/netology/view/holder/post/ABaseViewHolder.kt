@@ -1,4 +1,4 @@
-package ru.netology.adapter
+package ru.netology.view.holder.post
 
 import android.content.Intent
 import android.net.Uri
@@ -7,13 +7,14 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import ru.netology.activity.R
+import ru.netology.adapter.PostAdapter
 import ru.netology.model.Post
 import ru.netology.model.PostType
-import ru.netology.myapplication.R
 import ru.netology.repository.repository
 import ru.netology.service.intervalBetweenNowMessage
 
-abstract class BaseViewHolder(val adapter: PostAdapter, view: View) :
+abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
     RecyclerView.ViewHolder(view) {
     private val userName: TextView = itemView.findViewById(R.id.userName)
     private val createTime: TextView = itemView.findViewById(R.id.createTime)

@@ -1,4 +1,4 @@
-package ru.netology.adapter
+package ru.netology.view.holder.post
 
 import android.content.Intent
 import android.graphics.Color
@@ -6,12 +6,13 @@ import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import ru.netology.activity.R
+import ru.netology.adapter.PostAdapter
 import ru.netology.model.Post
-import ru.netology.myapplication.R
 import java.time.format.DateTimeFormatter
 
 open class PostViewHolder(postAdapter: PostAdapter, view: View) :
-    BaseViewHolder(postAdapter, view) {
+    ABaseViewHolder(postAdapter, view) {
     private val favoriteIcon: ImageButton = itemView.findViewById(R.id.favoriteIcon)
     private val favoriteCount: TextView = itemView.findViewById(R.id.favoriteCount)
     private val commentIcon: ImageButton = itemView.findViewById(R.id.commentIcon)
