@@ -1,13 +1,15 @@
 package ru.netology.activity
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.*
-import ru.netology.view.adapter.PostAdapter
 import ru.netology.model.Post
-import ru.netology.repository.repository
+import ru.netology.repository.CommercialPostRepository
+import ru.netology.repository.PostRepository
+import ru.netology.view.adapter.PostAdapter
 
 class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
 
@@ -18,11 +20,15 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         with(container) {
             layoutManager = LinearLayoutManager(this@MainActivity)
             launch {
-                var list = mutableListOf<Post>()
+                var postList = mutableListOf<Post>()
+                var commercialList = mutableListOf<Post>()
+
                 withContext(Dispatchers.IO) {
-                    list = repository.getList()
+                    postList = PostRepository.getList()
+                    commercialList = CommercialPostRepository.getList()
                 }
-                adapter = PostAdapter(list)
+                loadContainer.visibility = View.GONE
+                adapter = PostAdapter(postList, commercialList)
             }
         }
     }

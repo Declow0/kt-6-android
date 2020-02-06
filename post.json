@@ -1,0 +1,37 @@
+[
+  {
+    "id": 2,
+    "author": "Netology",
+    "content": "Our network is growing!",
+    "created": 1566418240,
+    "likedByMe": false
+  },
+  {
+    "id": 1,
+    "author": "Netology",
+    "content": "First post in our network!",
+    "created": 1566408240,
+    "likedByMe": false
+  },
+  {
+    "id": 3,
+    "author": "It's me",
+    "content": "First post in our network!",
+    "created": 1566408240,
+    "likedByMe": false
+  },
+  {
+    "id": 4,
+    "author": "Ivan",
+    "content": "Privet! Kak dela?",
+    "created": 1566408240,
+    "likedByMe": false
+  },
+  {
+    "id": 5,
+    "author": "Whois",
+    "content": "Are You from Russia, Moscow?",
+    "created": 1566408240,
+    "likedByMe": false
+  }
+]

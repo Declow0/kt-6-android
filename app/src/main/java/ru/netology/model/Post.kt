@@ -11,11 +11,11 @@ import java.util.*
 data class Post(
     @SerializedName("author")
     @Expose
-    val createdUser: String,
+    val createdUser: String = "",
 
     @SerializedName("content")
     @Expose
-    val content: String,
+    val content: String = "",
 
     @SerializedName("created")
     @JsonAdapter(LocalDateTimeDeserializer::class)
@@ -36,6 +36,9 @@ data class Post(
     val location: Location? = null,
 
     val youtubeId: String? = null,
+
+    @SerializedName("url")
+    @Expose
     val commercialContent: Uri? = null,
     val original: UUID? = null,
     val id: UUID = UUID.randomUUID(),

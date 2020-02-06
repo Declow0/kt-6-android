@@ -3,16 +3,18 @@ package ru.netology.view.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import ru.netology.activity.R
 import ru.netology.model.Post
 import ru.netology.model.PostType
-import ru.netology.activity.R
 import ru.netology.view.holder.post.ABaseViewHolder
 import ru.netology.view.holder.post.InnerViewHolder
 import ru.netology.view.holder.post.PostViewHolder
 import ru.netology.view.holder.post.RepostViewHolder
 
-open class PostAdapter(val postList: MutableList<Post>) :
-    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class PostAdapter(
+    val postList: MutableList<Post>,
+    val commercialList: List<Post> = emptyList()
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
             2 -> InnerViewHolder(
@@ -35,16 +37,25 @@ open class PostAdapter(val postList: MutableList<Post>) :
             )
         }
 
-    override fun getItemCount(): Int = postList.size
+    override fun getItemCount(): Int = postList.size + postList.size / 3
 
     override fun getItemViewType(position: Int): Int =
         when {
-            postList[position].type.contains(PostType.INNER) -> 2
-            postList[position].type.contains(PostType.REPOST) -> 1
+            mapPosition(position).type.contains(PostType.INNER) -> 2
+            mapPosition(position).type.contains(PostType.REPOST) -> 1
             else -> 0
         }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is ABaseViewHolder) holder.bind(postList[position])
+        if (holder is ABaseViewHolder) holder.bind(mapPosition(position))
+    }
+
+    private fun mapPosition(position: Int): Post {
+        val a = position % 4
+        return if (a == 3) {
+            commercialList[(position / 4) % commercialList.size]
+        } else {
+            postList[position / 4 + a]
+        }
     }
 }

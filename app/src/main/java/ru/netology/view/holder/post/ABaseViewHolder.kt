@@ -8,11 +8,12 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.activity.R
-import ru.netology.view.adapter.PostAdapter
 import ru.netology.model.Post
 import ru.netology.model.PostType
-import ru.netology.repository.repository
+import ru.netology.repository.CommercialPostRepository
+import ru.netology.repository.PostRepository
 import ru.netology.service.intervalBetweenNowMessage
+import ru.netology.view.adapter.PostAdapter
 
 abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
     RecyclerView.ViewHolder(view) {
@@ -92,7 +93,8 @@ abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
         if (post.type.contains(PostType.REPOST)) {
             repost!!.visibility = View.VISIBLE
 
-            val reposted = repository.get(post.original)
+            var reposted = PostRepository.get(post.original)
+            reposted = reposted ?: CommercialPostRepository.get(post.original)
             if (reposted != null) {
                 with(repost) {
                     layoutManager = LinearLayoutManager(repost.context)
