@@ -16,22 +16,22 @@ abstract class APostRepository(
     protected val cachedPosts = HashMap<UUID, Post>()
 
     suspend fun getList(): MutableList<Post> {
-        if (!PostRepository.isCached) {
+        if (!isCached) {
             cache()
         }
 
-        return PostRepository.cachedPosts
+        return cachedPosts
             .values
             .sortedByDescending { it.createTime }
             .toMutableList()
     }
 
     fun get(uuid: UUID?): Post? {
-        return PostRepository.cachedPosts[uuid]
+        return cachedPosts[uuid]
     }
 
     private suspend fun cache() {
-        PostRepository.cachedPosts.putAll(
+        cachedPosts.putAll(
             HttpClient {
                 install(JsonFeature) {
                     acceptContentTypes = listOf(
@@ -47,6 +47,6 @@ abstract class APostRepository(
                 .map { it.id to it }
                 .toMap()
         )
-        PostRepository.isCached = true
+        isCached = true
     }
 }

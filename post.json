@@ -33,5 +33,40 @@
     "content": "Are You from Russia, Moscow?",
     "created": 1566408240,
     "likedByMe": false
+  },
+  {
+    "id": 6,
+    "author": "Netology",
+    "content": "Our network is growing! Stronk!",
+    "created": 1566418240,
+    "likedByMe": false
+  },
+  {
+    "id": 7,
+    "author": "Netology",
+    "content": "7th post in our network!",
+    "created": 1566408240,
+    "likedByMe": false
+  },
+  {
+    "id": 8,
+    "author": "It's me",
+    "content": "MonkaS. This is huge network!",
+    "created": 1566408240,
+    "likedByMe": false
+  },
+  {
+    "id": 9,
+    "author": "Ivan",
+    "content": "Privet! Kak dela? HOROSHO",
+    "created": 1566408240,
+    "likedByMe": false
+  },
+  {
+    "id": 10,
+    "author": "Whois",
+    "content": "Who I am?",
+    "created": 1566408240,
+    "likedByMe": false
   }
 ]

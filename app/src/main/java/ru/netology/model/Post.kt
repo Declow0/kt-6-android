@@ -5,6 +5,7 @@ import com.google.gson.annotations.Expose
 import com.google.gson.annotations.JsonAdapter
 import com.google.gson.annotations.SerializedName
 import ru.netology.deserializer.LocalDateTimeDeserializer
+import ru.netology.deserializer.UriDeserializer
 import java.time.LocalDateTime
 import java.util.*
 
@@ -22,9 +23,10 @@ data class Post(
     @Expose
     val createTime: LocalDateTime = LocalDateTime.now(),
 
+    @Expose
     val favorite: Long = 0L,
-    val share: Long = 0L,
     val comment: Long = 0L,
+    val share: Long = 0L,
 
     @SerializedName("likedByMe")
     @Expose
@@ -32,12 +34,16 @@ data class Post(
     val shareCurrentUser: Boolean = false,
     val commentCurrentUser: Boolean = false,
 
+    @Expose
     val address: String = "",
+    @Expose
     val location: Location? = null,
 
+    @Expose
     val youtubeId: String? = null,
 
     @SerializedName("url")
+    @JsonAdapter(UriDeserializer::class)
     @Expose
     val commercialContent: Uri? = null,
     val original: UUID? = null,
