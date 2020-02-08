@@ -57,12 +57,13 @@ class PostAdapter(
         commercialList: MutableList<Post>
     ): MutableList<Post> {
         val shufflePost = ArrayList<Post>(postList.size + postList.size / 3)
-        for (i in 0..(postList.size / 3)) {
+        loop@ for (i in 0..(postList.size / 3)) {
             for (j in 0..2) {
                 val index = i * 3 + j
-                if (index < postList.size) {
-                    shufflePost.add(postList[index])
+                if (index >= postList.size) {
+                    break@loop
                 }
+                shufflePost.add(postList[index])
             }
             shufflePost.add(commercialList[i % commercialList.size])
         }
