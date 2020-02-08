@@ -24,7 +24,7 @@ open class PostViewHolder(postAdapter: PostAdapter, view: View) :
         with(itemView) {
             this.setOnLongClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION) {
-                    adapter.postList.removeAt(adapterPosition)
+                    adapter.posts.removeAt(adapterPosition)
                     adapter.notifyItemRemoved(adapterPosition)
                 }
 
@@ -33,33 +33,33 @@ open class PostViewHolder(postAdapter: PostAdapter, view: View) :
 
             favoriteIcon.setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION) {
-                    var post = adapter.postList[adapterPosition]
+                    var post = adapter.posts[adapterPosition]
 
                     post = post.copy(
                         favorite = if (post.favoriteCurrentUser) post.favorite - 1 else post.favorite + 1,
                         favoriteCurrentUser = !post.favoriteCurrentUser
                     )
-                    adapter.postList[adapterPosition] = post
+                    adapter.posts[adapterPosition] = post
                     adapter.notifyItemChanged(adapterPosition)
                 }
             }
 
             commentIcon.setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION) {
-                    var post = adapter.postList[adapterPosition]
+                    var post = adapter.posts[adapterPosition]
 
                     post = post.copy(
                         comment = if (post.commentCurrentUser) post.comment - 1 else post.comment + 1,
                         commentCurrentUser = !post.commentCurrentUser
                     )
-                    adapter.postList[adapterPosition] = post
+                    adapter.posts[adapterPosition] = post
                     adapter.notifyItemChanged(adapterPosition)
                 }
             }
 
             shareIcon.setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION) {
-                    var post = adapter.postList[adapterPosition]
+                    var post = adapter.posts[adapterPosition]
 
                     if (!post.shareCurrentUser) {
                         post = post.copy(
@@ -80,7 +80,7 @@ open class PostViewHolder(postAdapter: PostAdapter, view: View) :
                             }
                         )
 
-                        adapter.postList[adapterPosition] = post
+                        adapter.posts[adapterPosition] = post
                         adapter.notifyItemChanged(adapterPosition)
                     }
                 }

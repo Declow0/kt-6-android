@@ -12,9 +12,11 @@ import ru.netology.view.holder.post.PostViewHolder
 import ru.netology.view.holder.post.RepostViewHolder
 
 class PostAdapter(
-    val postList: MutableList<Post>,
-    val commercialList: List<Post> = emptyList()
+    postList: MutableList<Post>,
+    commercialList: MutableList<Post> = mutableListOf()
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    val posts: MutableList<Post> = shufflePosts(postList, commercialList)
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
             2 -> InnerViewHolder(
@@ -37,25 +39,33 @@ class PostAdapter(
             )
         }
 
-    override fun getItemCount(): Int = postList.size + postList.size / 3
+    override fun getItemCount(): Int = posts.size
 
     override fun getItemViewType(position: Int): Int =
         when {
-            mapPosition(position).type.contains(PostType.INNER) -> 2
-            mapPosition(position).type.contains(PostType.REPOST) -> 1
+            posts[position].type.contains(PostType.INNER) -> 2
+            posts[position].type.contains(PostType.REPOST) -> 1
             else -> 0
         }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if (holder is ABaseViewHolder) holder.bind(mapPosition(position))
+        if (holder is ABaseViewHolder) holder.bind(posts[position])
     }
 
-    private fun mapPosition(position: Int): Post {
-        val a = position % 4
-        return if (a == 3) {
-            commercialList[(position / 4) % commercialList.size]
-        } else {
-            postList[position / 4 + a]
+    private fun shufflePosts(
+        postList: MutableList<Post>,
+        commercialList: MutableList<Post>
+    ): MutableList<Post> {
+        val shufflePost = ArrayList<Post>(postList.size + postList.size / 3)
+        for (i in 0..(postList.size / 3)) {
+            for (j in 0..2) {
+                val index = i * 3 + j
+                if (index < postList.size) {
+                    shufflePost.add(postList[index])
+                }
+            }
+            shufflePost.add(commercialList[i % commercialList.size])
         }
+        return shufflePost
     }
 }

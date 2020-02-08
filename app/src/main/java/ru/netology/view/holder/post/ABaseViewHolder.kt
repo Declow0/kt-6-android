@@ -30,7 +30,7 @@ abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
         with(itemView) {
             geolocation.setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION) {
-                    val post = adapter.postList[adapterPosition]
+                    val post = adapter.posts[adapterPosition]
 
                     context.startActivity(
                         Intent().apply {
@@ -47,7 +47,7 @@ abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
 
             youtube.setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION) {
-                    val post = adapter.postList[adapterPosition]
+                    val post = adapter.posts[adapterPosition]
                     context.startActivity(
                         Intent().apply {
                             action = Intent.ACTION_VIEW
@@ -59,7 +59,7 @@ abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
 
             commercial.setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION) {
-                    val post = adapter.postList[adapterPosition]
+                    val post = adapter.posts[adapterPosition]
                     context.startActivity(
                         Intent().apply {
                             action = Intent.ACTION_VIEW
