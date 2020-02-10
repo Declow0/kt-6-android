@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.activity.R
 import ru.netology.model.Post
+import ru.netology.model.PostType
 import ru.netology.repository.CommercialPostRepository
 import ru.netology.repository.PostRepository
 import ru.netology.service.intervalBetweenNowMessage
@@ -72,24 +73,24 @@ abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
 
     open fun bind(post: Post) {
         createTime.text =
-            if (post.type.contains(ru.netology.model.PostType.COMMERCIAL)) "Рекламная запись"
+            if (post.type.contains(PostType.COMMERCIAL)) "Рекламная запись"
             else intervalBetweenNowMessage(post.createTime)
         userName.text = post.createdUser
         postContent.text = post.content
 
         geolocation.visibility =
-            if (post.type.contains(ru.netology.model.PostType.GEO_EVENT)) View.VISIBLE else View.INVISIBLE
+            if (post.type.contains(PostType.GEO_EVENT)) View.VISIBLE else View.INVISIBLE
 //      TODO:
 //          var url = URL("http://img.youtube.com/vi/${post.youtubeId}/maxresdefault.jpg")
 //          interactive.background = Drawable.createFromStream()
         youtube.visibility =
-            if (post.type.contains(ru.netology.model.PostType.YOUTUBE)) View.VISIBLE else View.GONE
+            if (post.type.contains(PostType.YOUTUBE)) View.VISIBLE else View.GONE
         commercial.visibility =
-            if (post.type.contains(ru.netology.model.PostType.COMMERCIAL)) View.VISIBLE else View.GONE
+            if (post.type.contains(PostType.COMMERCIAL)) View.VISIBLE else View.GONE
     }
 
     fun bindRepost(post: Post) {
-        if (post.type.contains(ru.netology.model.PostType.REPOST)) {
+        if (post.type.contains(PostType.REPOST)) {
             repost!!.visibility = View.VISIBLE
 
             var reposted = PostRepository.get(post.original)

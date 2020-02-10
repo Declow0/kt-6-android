@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.activity.R
 import ru.netology.model.Post
+import ru.netology.model.PostType
 import ru.netology.view.holder.post.ABaseViewHolder
 import ru.netology.view.holder.post.InnerViewHolder
 import ru.netology.view.holder.post.PostViewHolder
@@ -42,8 +43,8 @@ class PostAdapter(
 
     override fun getItemViewType(position: Int): Int =
         when {
-            posts[position].type.contains(ru.netology.model.PostType.INNER) -> 2
-            posts[position].type.contains(ru.netology.model.PostType.REPOST) -> 1
+            posts[position].type.contains(PostType.INNER) -> 2
+            posts[position].type.contains(PostType.REPOST) -> 1
             else -> 0
         }
 
