@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.activity.R
+import ru.netology.model.Post
 import ru.netology.repository.CommercialPostRepository
 import ru.netology.repository.PostRepository
 import ru.netology.service.intervalBetweenNowMessage
@@ -69,7 +70,7 @@ abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
         }
     }
 
-    open fun bind(post: ru.netology.model.Post) {
+    open fun bind(post: Post) {
         createTime.text =
             if (post.type.contains(ru.netology.model.PostType.COMMERCIAL)) "Рекламная запись"
             else intervalBetweenNowMessage(post.createTime)
@@ -87,7 +88,7 @@ abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
             if (post.type.contains(ru.netology.model.PostType.COMMERCIAL)) View.VISIBLE else View.GONE
     }
 
-    fun bindRepost(post: ru.netology.model.Post) {
+    fun bindRepost(post: Post) {
         if (post.type.contains(ru.netology.model.PostType.REPOST)) {
             repost!!.visibility = View.VISIBLE
 

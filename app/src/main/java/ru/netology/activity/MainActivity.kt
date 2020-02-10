@@ -20,8 +20,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
         with(container) {
             layoutManager = LinearLayoutManager(this@MainActivity)
             launch {
-                var postList = mutableListOf<ru.netology.model.Post>()
-                var commercialList = mutableListOf<ru.netology.model.Post>()
+                var postList = mutableListOf<Post>()
+                var commercialList = mutableListOf<Post>()
 
                 withContext(Dispatchers.IO) {
                     postList = PostRepository.getList()

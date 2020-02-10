@@ -7,8 +7,8 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.activity.R
-import ru.netology.view.adapter.PostAdapter
 import ru.netology.model.Post
+import ru.netology.view.adapter.PostAdapter
 import java.time.format.DateTimeFormatter
 
 open class PostViewHolder(postAdapter: PostAdapter, view: View) :
@@ -88,7 +88,7 @@ open class PostViewHolder(postAdapter: PostAdapter, view: View) :
         }
     }
 
-    override fun bind(post: ru.netology.model.Post) {
+    override fun bind(post: Post) {
         super.bind(post)
         bindCountView(favoriteCount, post.favorite)
         if (post.favoriteByMe) {

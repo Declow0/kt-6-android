@@ -6,7 +6,7 @@ import ru.netology.model.Post
 
 class RepostViewHolder(postAdapter: PostAdapter, view: View) : PostViewHolder(postAdapter, view) {
 
-    override fun bind(post: ru.netology.model.Post) {
+    override fun bind(post: Post) {
         super.bind(post)
         bindRepost(post)
     }
