@@ -38,9 +38,7 @@ abstract class APostRepository(
                         ContentType.Text.Plain,
                         ContentType.Application.Json
                     )
-                    serializer = GsonSerializer {
-                        excludeFieldsWithoutExposeAnnotation()
-                    }
+                    serializer = GsonSerializer()
                 }
             }
                 .get<List<Post>>(contentUrl)

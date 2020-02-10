@@ -7,9 +7,7 @@
     "favorite": 15,
     "comment": 16,
     "share": 12,
-    "favoriteByMe": true,
-    "shareByMe": false,
-    "commentByMe": false
+    "favoriteByMe": true
   },
   {
     "id": "8a247070-da3d-466e-80c5-43fbe94cae01",
@@ -21,7 +19,6 @@
     "comment": 12,
     "share": 1,
     "favoriteByMe": true,
-    "shareByMe": false,
     "commentByMe": true
   },
   {
@@ -33,49 +30,19 @@
     "location": {
       "latitude": 55.022899,
       "longitude": 82.923357
-    }
+    },
+    "favorite": 0,
+    "comment": 1,
+    "share": 1,
+    "shareByMe": true,
+    "commentByMe": true
   },
   {
     "id": "8a247070-da3d-466e-80c5-43fbe94cae03",
     "createdUser": "Ivan",
-    "content": "Privet! Kak dela?",
+    "content": "Privet! Kak dela? This video is great :-)",
     "createTime": 1566130240,
-    "address": "Красный пр-т., 22, Новосибирск, Новосибирская обл., 630007"
-  },
-  {
-    "id": "8a247070-da3d-466e-80c5-43fbe94cae04",
-    "createdUser": "Whois",
-    "content": "Are You from Russia, Moscow?",
-    "createTime": 1566403340
-  },
-  {
-    "id": "8a247070-da3d-466e-80c5-43fbe94cae05",
-    "createdUser": "Netology",
-    "content": "Our network is growing! Stronk!",
-    "createTime": 1566413600
-  },
-  {
-    "id": "8a247070-da3d-466e-80c5-43fbe94cae06",
-    "createdUser": "Netology",
-    "content": "7th post in our network!",
-    "createTime": 1566406400
-  },
-  {
-    "id": "8a247070-da3d-466e-80c5-43fbe94cae07",
-    "createdUser": "It's me",
-    "content": "MonkaS. This is huge network!",
-    "createTime": 1563458940
-  },
-  {
-    "id": "8a247070-da3d-466e-80c5-43fbe94cae08",
-    "createdUser": "Ivan",
-    "content": "Privet! Kak dela? HOROSHO",
-    "createTime": 1561567480
-  },
-  {
-    "id": "8a247070-da3d-466e-80c5-43fbe94cae09",
-    "createdUser": "Whois",
-    "content": "Who I am?",
-    "createTime": 1566445640
+    "address": "Красный пр-т., 22, Новосибирск, Новосибирская обл., 630007",
+    "youtubeId": "WhWc3b3KhnY"
   }
 ]
