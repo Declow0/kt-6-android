@@ -36,8 +36,8 @@ open class PostViewHolder(postAdapter: PostAdapter, view: View) :
                     var post = adapter.posts[adapterPosition]
 
                     post = post.copy(
-                        favorite = if (post.favoriteCurrentUser) post.favorite - 1 else post.favorite + 1,
-                        favoriteCurrentUser = !post.favoriteCurrentUser
+                        favorite = if (post.favoriteByMe) post.favorite - 1 else post.favorite + 1,
+                        favoriteByMe = !post.favoriteByMe
                     )
                     adapter.posts[adapterPosition] = post
                     adapter.notifyItemChanged(adapterPosition)
@@ -49,8 +49,8 @@ open class PostViewHolder(postAdapter: PostAdapter, view: View) :
                     var post = adapter.posts[adapterPosition]
 
                     post = post.copy(
-                        comment = if (post.commentCurrentUser) post.comment - 1 else post.comment + 1,
-                        commentCurrentUser = !post.commentCurrentUser
+                        comment = if (post.commentByMe) post.comment - 1 else post.comment + 1,
+                        commentByMe = !post.commentByMe
                     )
                     adapter.posts[adapterPosition] = post
                     adapter.notifyItemChanged(adapterPosition)
@@ -61,10 +61,10 @@ open class PostViewHolder(postAdapter: PostAdapter, view: View) :
                 if (adapterPosition != RecyclerView.NO_POSITION) {
                     var post = adapter.posts[adapterPosition]
 
-                    if (!post.shareCurrentUser) {
+                    if (!post.shareByMe) {
                         post = post.copy(
                             share = post.share + 1,
-                            shareCurrentUser = true
+                            shareByMe = true
                         )
 
                         context.startActivity(
@@ -91,7 +91,7 @@ open class PostViewHolder(postAdapter: PostAdapter, view: View) :
     override fun bind(post: Post) {
         super.bind(post)
         bindCountView(favoriteCount, post.favorite)
-        if (post.favoriteCurrentUser) {
+        if (post.favoriteByMe) {
             favoriteIcon.setBackgroundResource(R.drawable.ic_favorite_active)
             favoriteCount.setTextColor(Color.parseColor("#F06292"))
         } else {
@@ -100,7 +100,7 @@ open class PostViewHolder(postAdapter: PostAdapter, view: View) :
         }
 
         bindCountView(commentCount, post.comment)
-        if (post.commentCurrentUser) {
+        if (post.commentByMe) {
             commentIcon.setBackgroundResource(R.drawable.ic_chat_bubble_active)
             commentCount.setTextColor(Color.parseColor("#2196F3"))
         } else {
@@ -109,7 +109,7 @@ open class PostViewHolder(postAdapter: PostAdapter, view: View) :
         }
 
         bindCountView(shareCount, post.share)
-        if (post.shareCurrentUser) {
+        if (post.shareByMe) {
             shareIcon.setBackgroundResource(R.drawable.ic_share_active)
             shareCount.setTextColor(Color.parseColor("#4CAF50"))
         } else {

@@ -1,12 +1,22 @@
 [
   {
-    "author": "Microsoft",
+    "id": "d5066f33-ce6d-4e95-9d89-4efa4fc9ca00",
+    "createdUser": "Microsoft",
     "content": "Печатать документы легко вместе с новым Office 365",
-    "url": "https://products.office.com"
+    "commercialContent": "https://products.office.com",
+    "favorite": 88,
+    "comment": 0,
+    "share": 1
   },
   {
-    "author": "Google",
+    "id": "d5066f33-ce6d-4e95-9d89-4efa4fc9ca01",
+    "createdUser": "Google",
     "content": "Используйте наш поиск!",
-    "url": "https://google.com"
+    "commercialContent": "https://google.com",
+    "favorite": 16,
+    "comment": 12,
+    "share": 41,
+    "favoriteByMe": false,
+    "shareByMe": true
   }
 ]

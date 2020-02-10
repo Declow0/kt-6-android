@@ -10,29 +10,30 @@ import java.time.LocalDateTime
 import java.util.*
 
 data class Post(
-    @SerializedName("author")
     @Expose
     val createdUser: String = "",
 
-    @SerializedName("content")
     @Expose
     val content: String = "",
 
-    @SerializedName("created")
     @JsonAdapter(LocalDateTimeDeserializer::class)
     @Expose
     val createTime: LocalDateTime = LocalDateTime.now(),
 
     @Expose
     val favorite: Long = 0L,
+    @Expose
     val comment: Long = 0L,
+    @Expose
     val share: Long = 0L,
 
     @SerializedName("likedByMe")
     @Expose
-    val favoriteCurrentUser: Boolean = false,
-    val shareCurrentUser: Boolean = false,
-    val commentCurrentUser: Boolean = false,
+    val favoriteByMe: Boolean = false,
+    @Expose
+    val shareByMe: Boolean = false,
+    @Expose
+    val commentByMe: Boolean = false,
 
     @Expose
     val address: String = "",
@@ -42,11 +43,12 @@ data class Post(
     @Expose
     val youtubeId: String? = null,
 
-    @SerializedName("url")
     @JsonAdapter(UriDeserializer::class)
     @Expose
     val commercialContent: Uri? = null,
+    @Expose
     val original: UUID? = null,
+    @Expose
     val id: UUID = UUID.randomUUID(),
     val inner: Boolean = false
 ) {

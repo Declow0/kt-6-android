@@ -1,72 +1,81 @@
 [
   {
-    "id": 2,
-    "author": "Netology",
+    "id": "8a247070-da3d-466e-80c5-43fbe94cae00",
+    "createdUser": "Netology",
     "content": "Our network is growing!",
-    "created": 1566418240,
-    "likedByMe": false
+    "createTime": 1566418240,
+    "favorite": 15,
+    "comment": 16,
+    "share": 12,
+    "favoriteByMe": true,
+    "shareByMe": false,
+    "commentByMe": false
   },
   {
-    "id": 1,
-    "author": "Netology",
+    "id": "8a247070-da3d-466e-80c5-43fbe94cae01",
+    "createdUser": "Netology",
     "content": "First post in our network!",
-    "created": 1566408240,
-    "likedByMe": false
+    "createTime": 1466408240,
+    "original": "8a247070-da3d-466e-80c5-43fbe94cae00",
+    "favorite": 1,
+    "comment": 12,
+    "share": 1,
+    "favoriteByMe": true,
+    "shareByMe": false,
+    "commentByMe": true
   },
   {
-    "id": 3,
-    "author": "It's me",
+    "id": "8a247070-da3d-466e-80c5-43fbe94cae02",
+    "createdUser": "It's me",
     "content": "First post in our network!",
-    "created": 1566408240,
-    "likedByMe": false
+    "createTime": 1566250240,
+    "original": "d5066f33-ce6d-4e95-9d89-4efa4fc9ca01",
+    "location": {
+      "latitude": 55.022899,
+      "longitude": 82.923357
+    }
   },
   {
-    "id": 4,
-    "author": "Ivan",
+    "id": "8a247070-da3d-466e-80c5-43fbe94cae03",
+    "createdUser": "Ivan",
     "content": "Privet! Kak dela?",
-    "created": 1566408240,
-    "likedByMe": false
+    "createTime": 1566130240,
+    "address": "Красный пр-т., 22, Новосибирск, Новосибирская обл., 630007"
   },
   {
-    "id": 5,
-    "author": "Whois",
+    "id": "8a247070-da3d-466e-80c5-43fbe94cae04",
+    "createdUser": "Whois",
     "content": "Are You from Russia, Moscow?",
-    "created": 1566408240,
-    "likedByMe": false
+    "createTime": 1566403340
   },
   {
-    "id": 6,
-    "author": "Netology",
+    "id": "8a247070-da3d-466e-80c5-43fbe94cae05",
+    "createdUser": "Netology",
     "content": "Our network is growing! Stronk!",
-    "created": 1566418240,
-    "likedByMe": false
+    "createTime": 1566413600
   },
   {
-    "id": 7,
-    "author": "Netology",
+    "id": "8a247070-da3d-466e-80c5-43fbe94cae06",
+    "createdUser": "Netology",
     "content": "7th post in our network!",
-    "created": 1566408240,
-    "likedByMe": false
+    "createTime": 1566406400
   },
   {
-    "id": 8,
-    "author": "It's me",
+    "id": "8a247070-da3d-466e-80c5-43fbe94cae07",
+    "createdUser": "It's me",
     "content": "MonkaS. This is huge network!",
-    "created": 1566408240,
-    "likedByMe": false
+    "createTime": 1563458940
   },
   {
-    "id": 9,
-    "author": "Ivan",
+    "id": "8a247070-da3d-466e-80c5-43fbe94cae08",
+    "createdUser": "Ivan",
     "content": "Privet! Kak dela? HOROSHO",
-    "created": 1566408240,
-    "likedByMe": false
+    "createTime": 1561567480
   },
   {
-    "id": 10,
-    "author": "Whois",
+    "id": "8a247070-da3d-466e-80c5-43fbe94cae09",
+    "createdUser": "Whois",
     "content": "Who I am?",
-    "created": 1566408240,
-    "likedByMe": false
+    "createTime": 1566445640
   }
 ]

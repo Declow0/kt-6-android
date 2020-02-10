@@ -10,10 +10,10 @@ import java.util.*
 import kotlin.collections.HashMap
 
 abstract class APostRepository(
-    val contentUrl: String
+    private val contentUrl: String
 ) {
-    protected var isCached = false
-    protected val cachedPosts = HashMap<UUID, Post>()
+    private var isCached = false
+    private val cachedPosts = HashMap<UUID, Post>()
 
     suspend fun getList(): MutableList<Post> {
         if (!isCached) {
