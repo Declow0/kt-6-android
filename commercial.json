@@ -1,24 +1,30 @@
 [
   {
-    "id": "d5066f33-ce6d-4e95-9d89-4efa4fc9ca00",
-    "createdUser": "Microsoft",
-    "content": "Печатать документы легко вместе с новым Office 365",
-    "commercialContent": "https://products.office.com",
-    "favorite": 69,
-    "comment": 12,
-    "share": 21,
-    "favoriteByMe": true,
-    "commentByMe": true,
-    "shareByMe": true
-  },
-  {
-    "id": "d5066f33-ce6d-4e95-9d89-4efa4fc9ca01",
     "createdUser": "Google",
     "content": "Используйте наш поиск!",
-    "commercialContent": "https://google.com",
+    "createTime": 1581375559,
     "favorite": 16,
     "comment": 12,
     "share": 41,
-    "shareByMe": true
+    "favoriteByMe": false,
+    "shareByMe": true,
+    "commentByMe": false,
+    "address": "",
+    "commercialContent": "https://google.com",
+    "id": "61c094c2-60f6-413a-be47-2da865e87086"
+  },
+  {
+    "createdUser": "Microsoft",
+    "content": "Печатать документы легко вместе с новым Office 365",
+    "createTime": 1581375559,
+    "favorite": 69,
+    "comment": 14,
+    "share": 21,
+    "favoriteByMe": true,
+    "shareByMe": true,
+    "commentByMe": true,
+    "address": "",
+    "commercialContent": "https://products.office.com",
+    "id": "32e43489-a18d-4587-be81-cfd14a7cbda7"
   }
 ]

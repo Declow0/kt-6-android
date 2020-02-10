@@ -13,9 +13,9 @@ abstract class APostRepository(
     private val contentUrl: String
 ) {
     private var isCached = false
-    private val cachedPosts = HashMap<UUID, Post>()
+    private val cachedPosts = HashMap<UUID, ru.netology.model.Post>()
 
-    suspend fun getList(): MutableList<Post> {
+    suspend fun getList(): MutableList<ru.netology.model.Post> {
         if (!isCached) {
             cache()
         }
@@ -26,7 +26,7 @@ abstract class APostRepository(
             .toMutableList()
     }
 
-    fun get(uuid: UUID?): Post? {
+    fun get(uuid: UUID?): ru.netology.model.Post? {
         return cachedPosts[uuid]
     }
 
@@ -41,7 +41,7 @@ abstract class APostRepository(
                     serializer = GsonSerializer()
                 }
             }
-                .get<List<Post>>(contentUrl)
+                .get<List<ru.netology.model.Post>>(contentUrl)
                 .map { it.id to it }
                 .toMap()
         )

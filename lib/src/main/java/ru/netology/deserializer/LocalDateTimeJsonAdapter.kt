@@ -6,7 +6,7 @@ import java.time.Instant
 import java.time.LocalDateTime
 import java.time.ZoneOffset.UTC
 
-class LocalDateTimeDeserializer : JsonDeserializer<LocalDateTime>, JsonSerializer<LocalDateTime> {
+class LocalDateTimeJsonAdapter : JsonDeserializer<LocalDateTime>, JsonSerializer<LocalDateTime> {
     override fun deserialize(
         json: JsonElement?,
         typeOfT: Type?,

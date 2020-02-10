@@ -8,8 +8,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.activity.R
-import ru.netology.model.Post
-import ru.netology.model.PostType
 import ru.netology.repository.CommercialPostRepository
 import ru.netology.repository.PostRepository
 import ru.netology.service.intervalBetweenNowMessage
@@ -37,7 +35,7 @@ abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
                             action = Intent.ACTION_VIEW
                             data = Uri.parse(
                                 "geo:" +
-                                        if (post.location != null) "${post.location.latitude},${post.location.longitude}" else "0,0" +
+                                        if (post.location != null) "${post.location!!.latitude},${post.location!!.longitude}" else "0,0" +
                                                 if (post.address.isNotBlank()) "?q=${Uri.encode(post.address)}" else ""
                             )
                         }
@@ -63,7 +61,7 @@ abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
                     context.startActivity(
                         Intent().apply {
                             action = Intent.ACTION_VIEW
-                            data = post.commercialContent
+                            data = Uri.parse(post.commercialContent!!.toURI().toString())
                         }
                     )
                 }
@@ -71,26 +69,26 @@ abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
         }
     }
 
-    open fun bind(post: Post) {
+    open fun bind(post: ru.netology.model.Post) {
         createTime.text =
-            if (post.type.contains(PostType.COMMERCIAL)) "Рекламная запись"
+            if (post.type.contains(ru.netology.model.PostType.COMMERCIAL)) "Рекламная запись"
             else intervalBetweenNowMessage(post.createTime)
         userName.text = post.createdUser
         postContent.text = post.content
 
         geolocation.visibility =
-            if (post.type.contains(PostType.GEO_EVENT)) View.VISIBLE else View.INVISIBLE
+            if (post.type.contains(ru.netology.model.PostType.GEO_EVENT)) View.VISIBLE else View.INVISIBLE
 //      TODO:
 //          var url = URL("http://img.youtube.com/vi/${post.youtubeId}/maxresdefault.jpg")
 //          interactive.background = Drawable.createFromStream()
         youtube.visibility =
-            if (post.type.contains(PostType.YOUTUBE)) View.VISIBLE else View.GONE
+            if (post.type.contains(ru.netology.model.PostType.YOUTUBE)) View.VISIBLE else View.GONE
         commercial.visibility =
-            if (post.type.contains(PostType.COMMERCIAL)) View.VISIBLE else View.GONE
+            if (post.type.contains(ru.netology.model.PostType.COMMERCIAL)) View.VISIBLE else View.GONE
     }
 
-    fun bindRepost(post: Post) {
-        if (post.type.contains(PostType.REPOST)) {
+    fun bindRepost(post: ru.netology.model.Post) {
+        if (post.type.contains(ru.netology.model.PostType.REPOST)) {
             repost!!.visibility = View.VISIBLE
 
             var reposted = PostRepository.get(post.original)

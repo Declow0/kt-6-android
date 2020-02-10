@@ -12,10 +12,10 @@ import ru.netology.view.holder.post.PostViewHolder
 import ru.netology.view.holder.post.RepostViewHolder
 
 class PostAdapter(
-    postList: MutableList<Post>,
-    commercialList: MutableList<Post> = mutableListOf()
+    postList: MutableList<ru.netology.model.Post>,
+    commercialList: MutableList<ru.netology.model.Post> = mutableListOf()
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    val posts: MutableList<Post> = shufflePosts(postList, commercialList)
+    val posts: MutableList<ru.netology.model.Post> = shufflePosts(postList, commercialList)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
@@ -43,8 +43,8 @@ class PostAdapter(
 
     override fun getItemViewType(position: Int): Int =
         when {
-            posts[position].type.contains(PostType.INNER) -> 2
-            posts[position].type.contains(PostType.REPOST) -> 1
+            posts[position].type.contains(ru.netology.model.PostType.INNER) -> 2
+            posts[position].type.contains(ru.netology.model.PostType.REPOST) -> 1
             else -> 0
         }
 
@@ -53,10 +53,10 @@ class PostAdapter(
     }
 
     private fun shufflePosts(
-        postList: MutableList<Post>,
-        commercialList: MutableList<Post>
-    ): MutableList<Post> {
-        val shufflePost = ArrayList<Post>(postList.size + postList.size / 3)
+        postList: MutableList<ru.netology.model.Post>,
+        commercialList: MutableList<ru.netology.model.Post>
+    ): MutableList<ru.netology.model.Post> {
+        val shufflePost = ArrayList<ru.netology.model.Post>(postList.size + postList.size / 3)
         loop@ for (i in 0..(postList.size / 3)) {
             for (j in 0..2) {
                 val index = i * 3 + j

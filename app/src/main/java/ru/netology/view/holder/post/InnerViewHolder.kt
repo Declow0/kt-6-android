@@ -6,7 +6,7 @@ import ru.netology.model.Post
 
 class InnerViewHolder(postAdapter: PostAdapter, view: View) : ABaseViewHolder(postAdapter, view) {
 
-    override fun bind(post: Post) {
+    override fun bind(post: ru.netology.model.Post) {
         super.bind(post)
         bindRepost(post)
     }

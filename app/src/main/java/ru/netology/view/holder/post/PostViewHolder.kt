@@ -88,7 +88,7 @@ open class PostViewHolder(postAdapter: PostAdapter, view: View) :
         }
     }
 
-    override fun bind(post: Post) {
+    override fun bind(post: ru.netology.model.Post) {
         super.bind(post)
         bindCountView(favoriteCount, post.favorite)
         if (post.favoriteByMe) {

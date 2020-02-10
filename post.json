@@ -1,48 +1,75 @@
 [
   {
-    "id": "8a247070-da3d-466e-80c5-43fbe94cae00",
-    "createdUser": "Netology",
-    "content": "Our network is growing!",
-    "createTime": 1566418240,
+    "createdUser": "Netology Group Company",
+    "content": "В чащах юга жил-был цитрус? Да, но фальшивый экземпляръ!",
+    "createTime": 1581374959,
     "favorite": 15,
     "comment": 16,
     "share": 12,
-    "favoriteByMe": true
-  },
-  {
-    "id": "8a247070-da3d-466e-80c5-43fbe94cae01",
-    "createdUser": "Netology",
-    "content": "First post in our network!",
-    "createTime": 1466408240,
-    "original": "8a247070-da3d-466e-80c5-43fbe94cae00",
-    "favorite": 1,
-    "comment": 12,
-    "share": 1,
     "favoriteByMe": true,
-    "commentByMe": true
-  },
-  {
-    "id": "8a247070-da3d-466e-80c5-43fbe94cae02",
-    "createdUser": "It's me",
-    "content": "First post in our network!",
-    "createTime": 1566250240,
-    "original": "d5066f33-ce6d-4e95-9d89-4efa4fc9ca01",
+    "shareByMe": false,
+    "commentByMe": false,
+    "address": "",
     "location": {
-      "latitude": 55.022899,
-      "longitude": 82.923357
+      "latitude": 55.7765289,
+      "longitude": 37.6749378
     },
-    "favorite": 0,
-    "comment": 1,
-    "share": 1,
-    "shareByMe": true,
-    "commentByMe": true
+    "youtubeId": "WhWc3b3KhnY",
+    "id": "46813418-0f33-4f2b-88ac-be4ca4b67ee8"
   },
   {
-    "id": "8a247070-da3d-466e-80c5-43fbe94cae03",
-    "createdUser": "Ivan",
-    "content": "Privet! Kak dela? This video is great :-)",
-    "createTime": 1566130240,
+    "createdUser": "JKH",
+    "content": "Клёвое место, чтобы затусить!",
+    "createTime": 1581202759,
+    "favorite": 14,
+    "comment": 10,
+    "share": 0,
+    "favoriteByMe": false,
+    "shareByMe": false,
+    "commentByMe": true,
     "address": "Красный пр-т., 22, Новосибирск, Новосибирская обл., 630007",
-    "youtubeId": "WhWc3b3KhnY"
+    "id": "2b6dbfe1-d598-4328-abe6-7762d4290408"
+  },
+  {
+    "createdUser": "RePoster",
+    "content": "Украл пост",
+    "createTime": 1581375499,
+    "favorite": 14,
+    "comment": 10,
+    "share": 0,
+    "favoriteByMe": false,
+    "shareByMe": false,
+    "commentByMe": false,
+    "address": "",
+    "original": "46813418-0f33-4f2b-88ac-be4ca4b67ee8",
+    "id": "b1697b7e-9d62-400d-8b33-149ed85e3588"
+  },
+  {
+    "createdUser": "ReRePoster",
+    "content": "Украл украденный пост",
+    "createTime": 1581375499,
+    "favorite": 0,
+    "comment": 14,
+    "share": 10,
+    "favoriteByMe": false,
+    "shareByMe": false,
+    "commentByMe": false,
+    "address": "",
+    "original": "b1697b7e-9d62-400d-8b33-149ed85e3588",
+    "id": "31143b8e-0ab2-4360-adbb-61e3fc527507"
+  },
+  {
+    "createdUser": "RePoster",
+    "content": "Украл пост",
+    "createTime": 1581375499,
+    "favorite": 14,
+    "comment": 10,
+    "share": 0,
+    "favoriteByMe": false,
+    "shareByMe": false,
+    "commentByMe": false,
+    "address": "",
+    "original": "61c094c2-60f6-413a-be47-2da865e87086",
+    "id": "9e7a70d7-88bc-421b-b422-174124871e9a"
   }
 ]

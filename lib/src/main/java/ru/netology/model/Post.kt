@@ -1,10 +1,8 @@
 package ru.netology.model
 
-import android.net.Uri
 import com.google.gson.annotations.JsonAdapter
-import com.google.gson.annotations.SerializedName
-import ru.netology.deserializer.LocalDateTimeDeserializer
-import ru.netology.deserializer.UriDeserializer
+import ru.netology.deserializer.LocalDateTimeJsonAdapter
+import java.net.URL
 import java.time.LocalDateTime
 import java.util.*
 
@@ -13,7 +11,7 @@ data class Post(
 
     val content: String = "",
 
-    @JsonAdapter(LocalDateTimeDeserializer::class)
+    @JsonAdapter(LocalDateTimeJsonAdapter::class)
     val createTime: LocalDateTime = LocalDateTime.now(),
 
     val favorite: Long = 0L,
@@ -29,10 +27,11 @@ data class Post(
 
     val youtubeId: String? = null,
 
-    @JsonAdapter(UriDeserializer::class)
-    val commercialContent: Uri? = null,
+    val commercialContent: URL? = null,
+
     val original: UUID? = null,
     val id: UUID = UUID.randomUUID(),
+
     @Transient
     val inner: Boolean = false
 ) {
