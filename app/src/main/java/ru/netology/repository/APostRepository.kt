@@ -1,23 +1,31 @@
 package ru.netology.repository
 
-import io.ktor.client.HttpClient
-import io.ktor.client.features.json.GsonSerializer
-import io.ktor.client.features.json.JsonFeature
-import io.ktor.client.request.get
-import io.ktor.http.ContentType
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import ru.netology.api.PostApi
 import ru.netology.model.Post
 import java.util.*
 import kotlin.collections.HashMap
 
 abstract class APostRepository(
-    private val contentUrl: String
+    private val filter: (Post) -> Boolean
 ) {
     private var isCached = false
     private val cachedPosts = HashMap<UUID, Post>()
 
-    suspend fun getList(): MutableList<Post> {
+    private val retrofit: Retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl("https://kt6-backend.herokuapp.com")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+    private val postApi: PostApi by lazy {
+        retrofit.create(PostApi::class.java)
+    }
+
+    suspend fun getList(token: String): MutableList<Post> {
         if (!isCached) {
-            cache()
+            cache(token)
         }
 
         return cachedPosts
@@ -30,18 +38,11 @@ abstract class APostRepository(
         return cachedPosts[uuid]
     }
 
-    private suspend fun cache() {
+    private suspend fun cache(token: String) {
         cachedPosts.putAll(
-            HttpClient {
-                install(JsonFeature) {
-                    acceptContentTypes = listOf(
-                        ContentType.Text.Plain,
-                        ContentType.Application.Json
-                    )
-                    serializer = GsonSerializer()
-                }
-            }
-                .get<List<Post>>(contentUrl)
+            postApi.getAllPosts("Bearer $token")
+                .body()!!
+                .filter(filter)
                 .map { it.id to it }
                 .toMap()
         )

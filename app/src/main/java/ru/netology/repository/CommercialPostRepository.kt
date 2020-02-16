@@ -1,4 +1,6 @@
 package ru.netology.repository
 
+import ru.netology.model.PostType
+
 object CommercialPostRepository :
-    APostRepository("https://raw.githubusercontent.com/Declow0/kt-6-android/master/commercial.json")
+    APostRepository({ it.type.contains(PostType.COMMERCIAL)})

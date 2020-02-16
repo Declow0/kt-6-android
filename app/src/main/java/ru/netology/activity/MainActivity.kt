@@ -1,35 +1,83 @@
 package ru.netology.activity
 
+import android.app.ProgressDialog
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.*
-import ru.netology.model.Post
-import ru.netology.repository.CommercialPostRepository
-import ru.netology.repository.PostRepository
-import ru.netology.view.adapter.PostAdapter
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.launch
+import org.jetbrains.anko.indeterminateProgressDialog
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
+import ru.netology.repository.AuthRepository
+import ru.netology.util.isAuthenticated
+import ru.netology.util.isValidLogin
+import ru.netology.util.isValidPassword
+import ru.netology.util.setAuthToken
 
 class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
+    private var dialog: ProgressDialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        with(container) {
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            launch {
-                var postList = mutableListOf<Post>()
-                var commercialList = mutableListOf<Post>()
-
-                withContext(Dispatchers.IO) {
-                    postList = PostRepository.getList()
-                    commercialList = CommercialPostRepository.getList()
+        if (isAuthenticated()) {
+            startActivity<FeedActivity>()
+            finish()
+        } else {
+            btn_login.setOnClickListener {
+                if (!isValidLogin(edt_login.text.toString())) {
+                    edt_login.error = resources.getString(R.string.invalid_login)
+                } else if (!isValidPassword(edt_password.text.toString())) {
+                    edt_password.error = resources.getString(R.string.invalid_password)
+                } else {
+                    launch {
+                        dialog =
+                            indeterminateProgressDialog(
+                                message = R.string.please_wait,
+                                title = R.string.authentication
+                            ) {
+                                setCancelable(false)
+                            }
+                        val response =
+                            AuthRepository.authenticate(
+                                edt_login.text.toString(),
+                                edt_password.text.toString()
+                            )
+                        dialog?.dismiss()
+                        if (response.isSuccessful) {
+                            toast(R.string.success).show()
+                            setAuthToken(response.body()!!.token)
+                            startActivity<FeedActivity>()
+                            finish()
+                        } else {
+                            toast(R.string.authentication_failed).show()
+                            toast(AuthRepository.parseError(response).error)
+                        }
+                    }
                 }
-                loadContainer.visibility = View.GONE
-                adapter = PostAdapter(postList, commercialList)
             }
         }
+
+        btn_registration.setOnClickListener {
+            startActivity<RegistrationActivity>()
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (isAuthenticated()) {
+            startActivity<FeedActivity>()
+            finish()
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        cancel()
+        dialog?.dismiss()
     }
 }

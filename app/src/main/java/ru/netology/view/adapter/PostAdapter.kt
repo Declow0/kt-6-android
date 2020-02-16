@@ -15,7 +15,7 @@ class PostAdapter(
     postList: MutableList<Post>,
     commercialList: MutableList<Post> = mutableListOf()
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    val posts: MutableList<Post> = shufflePosts(postList, commercialList)
+    val posts: MutableList<Post> = addCommercialToPostList(postList, commercialList)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
@@ -52,10 +52,14 @@ class PostAdapter(
         if (holder is ABaseViewHolder) holder.bind(posts[position])
     }
 
-    private fun shufflePosts(
+    private fun addCommercialToPostList(
         postList: MutableList<Post>,
         commercialList: MutableList<Post>
     ): MutableList<Post> {
+        if (commercialList.size == 0) {
+            return postList
+        }
+
         val shufflePost = ArrayList<Post>(postList.size + postList.size / 3)
         loop@ for (i in 0..(postList.size / 3)) {
             for (j in 0..2) {
