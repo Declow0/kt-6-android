@@ -1,16 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">My Application</string>
-    <string name="login">Login</string>
+    <string name="login">login</string>
     <string name="registration">registration</string>
     <string name="enter_login">Enter login</string>
     <string name="enter_password">Enter password</string>
+    <string name="repeat_password">Repeat password</string>
     <string name="success">Success</string>
     <string name="authentication_failed">Authentication failed</string>
     <string name="registration_failed">Registration failed</string>
-    <string name="repeat_password">Repeat password</string>
     <string name="please_wait">Please wait....</string>
     <string name="authentication">Authentication</string>
-    <string name="invalid_login">Login has wrong format</string>
-    <string name="invalid_password">Password is too simple</string>
+    <string name="invalid_login">Incorrect login\nLength should be 5 till 10 characters. Allow only english characters, numbers, dot or underscore</string>
+    <string name="invalid_password">Password is too simple\nLength should be 6 or more characters\nShould be at least one capital letter\nAllow only english characters and numbers</string>
     <string name="diff_passwords">Password aren\'t the same</string>
+    <string name="empty_password">Enter a password</string>
+    <string name="commercial_record">advertising record</string>
 </resources>

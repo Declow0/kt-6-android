@@ -8,12 +8,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.activity.R
+import ru.netology.model.Period
 import ru.netology.model.Post
 import ru.netology.model.PostType
 import ru.netology.repository.CommercialPostRepository
 import ru.netology.repository.PostRepository
-import ru.netology.service.intervalBetweenNowMessage
+import ru.netology.service.LocalDateTimeService
 import ru.netology.view.adapter.PostAdapter
+import java.time.LocalDateTime
 
 abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
     RecyclerView.ViewHolder(view) {
@@ -73,8 +75,49 @@ abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
 
     open fun bind(post: Post) {
         createTime.text =
-            if (post.type.contains(PostType.COMMERCIAL)) "Рекламная запись"
-            else intervalBetweenNowMessage(post.createTime)
+            if (post.type.contains(PostType.COMMERCIAL)) this.itemView.resources.getString(R.string.commercial_record)
+            else {
+                val (period, quantity) = LocalDateTimeService.betweenInterval(
+                    post.createTime,
+                    LocalDateTime.now()
+                )
+                when (period) {
+                    Period.SECONDS -> this.itemView.resources.getQuantityString(
+                        R.plurals.seconds_ago,
+                        quantity.toInt()
+                    )
+                    Period.MINUTES -> this.itemView.resources.getQuantityString(
+                        R.plurals.minutes_ago,
+                        quantity.toInt(),
+                        quantity.toInt()
+                    )
+                    Period.HOURS -> this.itemView.resources.getQuantityString(
+                        R.plurals.hours_ago,
+                        quantity.toInt(),
+                        quantity.toInt()
+                    )
+                    Period.DAYS -> this.itemView.resources.getQuantityString(
+                        R.plurals.days_ago,
+                        quantity.toInt(),
+                        quantity.toInt()
+                    )
+                    Period.WEEKS -> this.itemView.resources.getQuantityString(
+                        R.plurals.weeks_ago,
+                        quantity.toInt(),
+                        quantity.toInt()
+                    )
+                    Period.MONTHS -> this.itemView.resources.getQuantityString(
+                        R.plurals.months_ago,
+                        quantity.toInt(),
+                        quantity.toInt()
+                    )
+                    Period.YEARS -> this.itemView.resources.getQuantityString(
+                        R.plurals.years_ago,
+                        quantity.toInt(),
+                        quantity.toInt()
+                    )
+                }
+            }
         userName.text = post.createdUser
         postContent.text = post.content
 

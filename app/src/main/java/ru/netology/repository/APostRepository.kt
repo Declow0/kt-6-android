@@ -2,6 +2,7 @@ package ru.netology.repository
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import ru.netology.activity.BuildConfig
 import ru.netology.api.PostApi
 import ru.netology.model.Post
 import java.util.*
@@ -15,7 +16,7 @@ abstract class APostRepository(
 
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://kt6-backend.herokuapp.com")
+            .baseUrl(BuildConfig.SERVER_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }

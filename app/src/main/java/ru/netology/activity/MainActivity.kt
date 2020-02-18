@@ -29,10 +29,15 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
             finish()
         } else {
             btn_login.setOnClickListener {
+                til_login.error = null
+                til_password.error = null
+
                 if (!isValidLogin(edt_login.text.toString())) {
-                    edt_login.error = resources.getString(R.string.invalid_login)
+                    til_login.error = resources.getString(R.string.invalid_login)
+                } else if (edt_password.text.toString().isEmpty()) {
+                    til_password.error = resources.getString(R.string.empty_password)
                 } else if (!isValidPassword(edt_password.text.toString())) {
-                    edt_password.error = resources.getString(R.string.invalid_password)
+                    til_password.error = resources.getString(R.string.invalid_password)
                 } else {
                     launch {
                         dialog =

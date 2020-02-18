@@ -17,8 +17,17 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        val SERVER_URL = "SERVER_URL"
+
+        getByName("debug") {
+            isMinifyEnabled = false
+            buildConfigField("String", SERVER_URL, "\"https://kt6-backend.herokuapp.com\"")
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+        }
+
         getByName("release") {
             isMinifyEnabled = false
+            buildConfigField("String", SERVER_URL, "\"https://kt6-backend.herokuapp.com\"")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }

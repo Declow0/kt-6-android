@@ -27,18 +27,21 @@ class RegistrationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
             val password = edt_registration_password.text.toString()
             val repeatedPassword = edt_registration_repeat_password.text.toString()
 
+            til_registration_login.error = null
+            til_registration_password.error = null
+            til_registration_repeat_password.error = null
+
             if (!isValidLogin(login)) {
-                edt_registration_login.error = resources.getString(R.string.invalid_login)
-            } else if (password != repeatedPassword) {
-                edt_registration_password.error =
-                    resources.getString(R.string.diff_passwords)
-                edt_registration_repeat_password.error =
-                    resources.getString(R.string.diff_passwords)
+                til_registration_login.error = resources.getString(R.string.invalid_login)
+            } else if (password.isEmpty()) {
+                til_registration_password.error =
+                    resources.getString(R.string.empty_password)
             } else if (!isValidPassword(password)) {
-                edt_registration_password.error =
+                til_registration_password.error =
                     resources.getString(R.string.invalid_password)
-                edt_registration_repeat_password.error =
-                    resources.getString(R.string.invalid_password)
+            } else if (password != repeatedPassword) {
+                til_registration_repeat_password.error =
+                    resources.getString(R.string.diff_passwords)
             } else {
                 launch {
                     dialog =
