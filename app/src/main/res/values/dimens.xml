@@ -1,2 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <dimen name="activity_feed_load_container_width">100dp</dimen>
+    <dimen name="activity_feed_icon_width">48dp</dimen>
+    <dimen name="activity_feed_icon_height">48dp</dimen>
+
+    <dimen name="activity_feed_margin_outer">16dp</dimen>
+    <dimen name="activity_feed_margin_inner">8dp</dimen>
+
+
+    <dimen name="activity_feed_username_height">150dp</dimen>
+    <dimen name="activity_feed_margin_vertical_create_time">4dp</dimen>
+    <dimen name="activity_feed_text_size_create_time">12sp</dimen>
+    <dimen name="activity_feed_text_size_content">18sp</dimen>
+    <dimen name="activity_feed_link_button_height">100dp</dimen>
+    <dimen name="activity_feed_counter_margin">32dp</dimen>
+    <dimen name="activity_feed_after_content_padding">16dp</dimen>
+</resources>

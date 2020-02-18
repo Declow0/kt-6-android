@@ -11,6 +11,10 @@ import ru.netology.view.holder.post.InnerViewHolder
 import ru.netology.view.holder.post.PostViewHolder
 import ru.netology.view.holder.post.RepostViewHolder
 
+const val REGULAR_POST = 0
+const val RE_POST = 1
+const val INNER_POST = 2
+
 class PostAdapter(
     postList: MutableList<Post>,
     commercialList: MutableList<Post> = mutableListOf()
@@ -19,13 +23,13 @@ class PostAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder =
         when (viewType) {
-            2 -> InnerViewHolder(
+            INNER_POST -> InnerViewHolder(
                 this,
                 LayoutInflater
                     .from(parent.context)
                     .inflate(R.layout.inner_elem, parent, false)
             )
-            1 -> RepostViewHolder(
+            RE_POST -> RepostViewHolder(
                 this,
                 LayoutInflater
                     .from(parent.context)
@@ -43,9 +47,9 @@ class PostAdapter(
 
     override fun getItemViewType(position: Int): Int =
         when {
-            posts[position].type.contains(PostType.INNER) -> 2
-            posts[position].type.contains(PostType.REPOST) -> 1
-            else -> 0
+            posts[position].type.contains(PostType.INNER) -> INNER_POST
+            posts[position].type.contains(PostType.REPOST) -> RE_POST
+            else -> REGULAR_POST
         }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

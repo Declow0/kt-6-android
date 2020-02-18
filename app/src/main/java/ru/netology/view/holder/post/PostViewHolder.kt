@@ -1,7 +1,6 @@
 package ru.netology.view.holder.post
 
 import android.content.Intent
-import android.graphics.Color
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
@@ -93,28 +92,28 @@ open class PostViewHolder(postAdapter: PostAdapter, view: View) :
         bindCountView(favoriteCount, post.favorite)
         if (post.favoriteByMe) {
             favoriteIcon.setBackgroundResource(R.drawable.ic_favorite_active)
-            favoriteCount.setTextColor(Color.parseColor("#F06292"))
+            favoriteCount.setTextColor(this.itemView.resources.getColor(R.color.activeFavorite))
         } else {
             favoriteIcon.setBackgroundResource(R.drawable.ic_favorite)
-            favoriteCount.setTextColor(Color.parseColor("#999999"))
+            favoriteCount.setTextColor(this.itemView.resources.getColor(R.color.colorSecondaryText))
         }
 
         bindCountView(commentCount, post.comment)
         if (post.commentByMe) {
             commentIcon.setBackgroundResource(R.drawable.ic_chat_bubble_active)
-            commentCount.setTextColor(Color.parseColor("#2196F3"))
+            commentCount.setTextColor(this.itemView.resources.getColor(R.color.activeChat))
         } else {
             commentIcon.setBackgroundResource(R.drawable.ic_chat_bubble)
-            commentCount.setTextColor(Color.parseColor("#999999"))
+            commentCount.setTextColor(this.itemView.resources.getColor(R.color.colorSecondaryText))
         }
 
         bindCountView(shareCount, post.share)
         if (post.shareByMe) {
             shareIcon.setBackgroundResource(R.drawable.ic_share_active)
-            shareCount.setTextColor(Color.parseColor("#4CAF50"))
+            shareCount.setTextColor(this.itemView.resources.getColor(R.color.activeShare))
         } else {
             shareIcon.setBackgroundResource(R.drawable.ic_share)
-            shareCount.setTextColor(Color.parseColor("#999999"))
+            shareCount.setTextColor(this.itemView.resources.getColor(R.color.colorSecondaryText))
         }
     }
 }

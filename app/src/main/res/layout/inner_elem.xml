@@ -5,84 +5,83 @@
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="16dp"
+    android:layout_margin="@dimen/activity_feed_margin_outer"
     android:background="@android:color/background_light"
-    android:paddingBottom="16dp"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintTop_toTopOf="parent">
 
     <ImageButton
         android:id="@+id/avatar"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_margin="16dp"
+        android:layout_width="@dimen/activity_feed_icon_width"
+        android:layout_height="@dimen/activity_feed_icon_height"
+        android:layout_margin="@dimen/activity_feed_margin_outer"
         android:background="@drawable/ic_avatar"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ImageButton>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/userName"
-        android:layout_width="150dp"
+        android:layout_width="@dimen/activity_feed_username_height"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_margin="@dimen/activity_feed_margin_inner"
         android:ellipsize="end"
         android:singleLine="true"
-        android:textColor="#000000"
+        android:textColor="@color/colorMainText"
         app:layout_constraintStart_toEndOf="@id/avatar"
         app:layout_constraintTop_toTopOf="@id/avatar"
-        tools:text="Netsdfsdfsdfskdfksdgjfgsidgfusgdfuygsdufygsdfsdfsdfsdfsdfology"></TextView>
+        tools:text="Netsdfsdfsdfskdfksdgjfgsidgfusgdfuygsdufygsdfsdfsdfsdfsdfology" />
 
     <TextView
         android:id="@+id/createTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:layout_marginVertical="4dp"
-        android:textColor="#999999"
-        android:textSize="10sp"
+        android:layout_marginHorizontal="@dimen/activity_feed_margin_inner"
+        android:layout_marginVertical="@dimen/activity_feed_margin_vertical_create_time"
+        android:textColor="@color/colorSecondaryText"
+        android:textSize="@dimen/activity_feed_text_size_create_time"
         app:layout_constraintStart_toEndOf="@id/avatar"
         app:layout_constraintTop_toBottomOf="@id/userName"
-        tools:text="20 декабря 2019"></TextView>
+        tools:text="20 декабря 2019" />
 
     <ImageButton
         android:id="@+id/geolocation"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_margin="16dp"
+        android:layout_width="@dimen/activity_feed_icon_width"
+        android:layout_height="@dimen/activity_feed_icon_height"
+        android:layout_margin="@dimen/activity_feed_margin_outer"
         android:background="@drawable/ic_location_on"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"></ImageButton>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/postContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="8dp"
-        android:textColor="#000000"
-        android:textSize="18sp"
+        android:layout_marginHorizontal="@dimen/activity_feed_margin_outer"
+        android:layout_marginVertical="@dimen/activity_feed_margin_outer"
+        android:textColor="@color/colorMainText"
+        android:textSize="@dimen/activity_feed_text_size_content"
         app:layout_constraintTop_toBottomOf="@id/avatar"
-        tools:text="Моё первое сообщение"></TextView>
+        tools:text="Моё первое сообщение" />
 
     <ImageButton
         android:id="@+id/youtube"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="8dp"
+        android:layout_height="@dimen/activity_feed_link_button_height"
+        android:layout_marginHorizontal="@dimen/activity_feed_margin_outer"
+        android:layout_marginVertical="@dimen/activity_feed_margin_outer"
         android:background="@color/colorAccent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/postContent"></ImageButton>
+        app:layout_constraintTop_toBottomOf="@id/postContent" />
 
     <ImageButton
         android:id="@+id/commercial"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="8dp"
+        android:layout_height="@dimen/activity_feed_link_button_height"
+        android:layout_marginHorizontal="@dimen/activity_feed_margin_outer"
+        android:layout_marginVertical="@dimen/activity_feed_margin_outer"
         android:background="@color/colorPrimaryDark"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/youtube"></ImageButton>
+        app:layout_constraintTop_toBottomOf="@id/youtube" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/repost"
@@ -90,5 +89,5 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/commercial"
-        tools:itemCount="0"></androidx.recyclerview.widget.RecyclerView>
+        tools:itemCount="0" />
 </androidx.constraintlayout.widget.ConstraintLayout>

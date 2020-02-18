@@ -14,6 +14,7 @@ import ru.netology.repository.AuthRepository
 import ru.netology.util.isValidLogin
 import ru.netology.util.isValidPassword
 import ru.netology.util.setAuthToken
+import java.io.IOException
 
 class RegistrationActivity : AppCompatActivity(), CoroutineScope by MainScope() {
     private var dialog: ProgressDialog? = null
@@ -51,19 +52,24 @@ class RegistrationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
                         ) {
                             setCancelable(false)
                         }
-                    val response =
-                        AuthRepository.register(
-                            login,
-                            password
-                        )
-                    dialog?.dismiss()
-                    if (response.isSuccessful) {
-                        toast(R.string.success)
-                        setAuthToken(response.body()!!.token)
-                        finish()
-                    } else {
-                        toast(R.string.registration_failed)
-                        toast(AuthRepository.parseError(response).error)
+                    try {
+                        val response =
+                            AuthRepository.register(
+                                login,
+                                password
+                            )
+                        if (response.isSuccessful) {
+                            toast(R.string.success)
+                            setAuthToken(response.body()!!.token)
+                            finish()
+                        } else {
+                            toast(R.string.registration_failed)
+                            toast(AuthRepository.parseError(response).error)
+                        }
+                    } catch (e: IOException) {
+                        toast(R.string.network_error)
+                    } finally {
+                        dialog?.dismiss()
                     }
                 }
             }

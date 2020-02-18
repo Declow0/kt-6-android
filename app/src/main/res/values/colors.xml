@@ -3,5 +3,13 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
     <color name="colorBackground">#E8EAF6</color>
+
+    <color name="colorMainText">#000000</color>
+    <color name="colorSecondaryText">#999999</color>
+
+    <color name="activeFavorite">#F06292</color>
+    <color name="activeChat">#2196F3</color>
+    <color name="activeShare">#4CAF50</color>
 </resources>

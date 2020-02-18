@@ -15,9 +15,9 @@
 
     <ProgressBar
         android:id="@+id/loadContainer"
-        android:layout_width="100dp"
+        android:layout_width="@dimen/activity_feed_load_container_width"
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:indeterminate="true"></ProgressBar>
+        android:indeterminate="true" />
 </androidx.constraintlayout.widget.ConstraintLayout>

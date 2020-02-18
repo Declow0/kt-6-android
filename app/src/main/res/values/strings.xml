@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">My Application</string>
+    <string name="network_error">Check your internet connection</string>
     <string name="login">login</string>
     <string name="registration">registration</string>
     <string name="enter_login">Enter login</string>
@@ -15,5 +16,5 @@
     <string name="invalid_password">Password is too simple\nLength should be 6 or more characters\nShould be at least one capital letter\nAllow only english characters and numbers</string>
     <string name="diff_passwords">Password aren\'t the same</string>
     <string name="empty_password">Enter a password</string>
-    <string name="commercial_record">advertising record</string>
+    <string name="commercial_record">advertisement</string>
 </resources>

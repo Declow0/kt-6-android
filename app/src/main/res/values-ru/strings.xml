@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Моё приложение</string>
+    <string name="network_error">Проверьте своё интернет соединение</string>
     <string name="login">войти</string>
     <string name="registration">регистрация</string>
     <string name="enter_login">Введите логин</string>
@@ -12,9 +13,8 @@
     <string name="please_wait">Пожалуйста, подождите....</string>
     <string name="authentication">Аутентификация</string>
     <string name="invalid_login">Некорректное имя\nДлина должна быть от 5 до 10 символов\nМожет содержать только английские буквы, цифры, точку или нижнее подчеркивание</string>
-    <string name="invalid_password">Пароль слишком простой\nДлина должна быть от 6 символов\nДолжна быть как минимум одна заглавная буква\nМожет содержать только английские буквы, цифры</string>
+    <string name="invalid_password">Пароль слишком простой\nПароль должен быть от 6 символов, содержать как минимум одну заглавную букву и состоять только из английских букв, а также цифр</string>
     <string name="diff_passwords">Пароли не совпадают</string>
     <string name="empty_password">Введите пароль</string>
     <string name="commercial_record">рекламная запись</string>
-<!--Length should be 6 or more characters. Should be at least one capital letter\nAllow only english characters and numbers-->
 </resources>
