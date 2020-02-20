@@ -53,6 +53,7 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.3")
     implementation("com.squareup.retrofit2:retrofit:2.7.1")
     implementation("com.squareup.retrofit2:converter-gson:2.7.1")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.4.0")
     implementation("com.google.android.material:material:1.1.0")
     implementation("org.jetbrains.anko:anko-commons:0.10.8")
     implementation(project(":lib"))

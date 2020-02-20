@@ -1,6 +1,8 @@
 package ru.netology.repository
 
+import okhttp3.OkHttpClient
 import okhttp3.ResponseBody
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -14,6 +16,15 @@ import java.io.IOException
 object AuthRepository {
     private val retrofit: Retrofit by lazy {
         Retrofit.Builder()
+            .client(
+                OkHttpClient.Builder()
+                    .addInterceptor(
+                        HttpLoggingInterceptor().apply {
+                            level = HttpLoggingInterceptor.Level.BODY
+                        }
+                    )
+                    .build()
+            )
             .baseUrl(BuildConfig.SERVER_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
