@@ -3,12 +3,13 @@
     <string name="app_name">Моё приложение</string>
     <string name="network_error">Проверьте своё интернет соединение</string>
     <string name="login">войти</string>
-    <string name="registration">регистрация</string>
+    <string name="registration">Регистрация</string>
     <string name="enter_login">Введите логин</string>
     <string name="enter_password">Введите пароль</string>
     <string name="repeat_password">Повторите пароль</string>
     <string name="success">Успешно</string>
     <string name="authentication_failed">Аутентификация прошла неуспешно</string>
+    <string name="authorization_failed">Авторизация прошла неуспешно</string>
     <string name="registration_failed">Регистрация прошла неуспешно</string>
     <string name="please_wait">Пожалуйста, подождите....</string>
     <string name="authentication">Аутентификация</string>

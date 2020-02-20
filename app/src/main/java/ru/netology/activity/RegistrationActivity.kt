@@ -10,6 +10,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.toast
+import ru.netology.api.retrofit.RetrofitClient
 import ru.netology.repository.AuthRepository
 import ru.netology.util.isValidLogin
 import ru.netology.util.isValidPassword
@@ -22,6 +23,7 @@ class RegistrationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
+        val authRepository = AuthRepository()
 
         btn_register.setOnClickListener {
             val login = edt_registration_login.text.toString()
@@ -48,13 +50,13 @@ class RegistrationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
                     dialog =
                         indeterminateProgressDialog(
                             message = R.string.please_wait,
-                            title = R.string.authentication
+                            title = R.string.registration
                         ) {
                             setCancelable(false)
                         }
                     try {
                         val response =
-                            AuthRepository.register(
+                            authRepository.register(
                                 login,
                                 password
                             )
@@ -64,7 +66,7 @@ class RegistrationActivity : AppCompatActivity(), CoroutineScope by MainScope() 
                             finish()
                         } else {
                             toast(R.string.registration_failed)
-                            toast(AuthRepository.parseError(response).error)
+                            toast(RetrofitClient.parseError(response).error)
                         }
                     } catch (e: IOException) {
                         toast(R.string.network_error)

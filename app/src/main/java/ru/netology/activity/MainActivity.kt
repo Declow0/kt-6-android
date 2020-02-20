@@ -11,6 +11,7 @@ import kotlinx.coroutines.launch
 import org.jetbrains.anko.indeterminateProgressDialog
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
+import ru.netology.api.retrofit.RetrofitClient
 import ru.netology.repository.AuthRepository
 import ru.netology.util.isAuthenticated
 import ru.netology.util.isValidLogin
@@ -29,6 +30,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
             startActivity<FeedActivity>()
             finish()
         } else {
+            val authRepository = AuthRepository()
             btn_login.setOnClickListener {
                 til_login.error = null
                 til_password.error = null
@@ -50,7 +52,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
                             }
                         try {
                             val response =
-                                AuthRepository.authenticate(
+                                authRepository.authenticate(
                                     edt_login.text.toString(),
                                     edt_password.text.toString()
                                 )
@@ -61,7 +63,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope by MainScope() {
                                 finish()
                             } else {
                                 toast(R.string.authentication_failed).show()
-                                toast(AuthRepository.parseError(response).error)
+                                toast(RetrofitClient.parseError(response).error)
                             }
                         } catch (e: IOException) {
                             toast(R.string.network_error)

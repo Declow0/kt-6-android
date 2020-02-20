@@ -2,5 +2,5 @@ package ru.netology.repository
 
 import ru.netology.model.PostType
 
-object PostRepository :
+class PostRepository :
     APostRepository({ !it.type.contains(PostType.COMMERCIAL) })

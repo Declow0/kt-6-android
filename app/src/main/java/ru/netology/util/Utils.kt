@@ -2,6 +2,11 @@ package ru.netology.util
 
 import android.content.Context
 import androidx.core.content.edit
+import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.toast
+import ru.netology.activity.MainActivity
+import ru.netology.activity.R
+import ru.netology.api.retrofit.RetrofitClient
 import java.util.regex.Pattern
 
 private val loginPattern by lazy(LazyThreadSafetyMode.NONE) {
@@ -26,8 +31,19 @@ fun Context.getAuthToken() =
 fun Context.isAuthenticated() =
     getAuthToken().isNotEmpty()
 
-fun Context.setAuthToken(token: String) =
+fun Context.setAuthToken(authToken: String) {
+    RetrofitClient.addAuthToken(authToken)
     getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE)
         .edit {
-            putString(AUTHENTICATED_SHARED_KEY, token)
+            putString(AUTHENTICATED_SHARED_KEY, authToken)
         }
+}
+
+fun Context.unauthorized() {
+    getSharedPreferences(API_SHARED_FILE, Context.MODE_PRIVATE)
+        .edit {
+            remove(AUTHENTICATED_SHARED_KEY)
+        }
+    startActivity<MainActivity>()
+    toast(R.string.authorization_failed)
+}

@@ -2,12 +2,17 @@ package ru.netology.view.holder.post
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.MainScope
+import kotlinx.coroutines.launch
 import ru.netology.activity.R
+import ru.netology.api.retrofit.RetrofitClient
 import ru.netology.model.Period
 import ru.netology.model.Post
 import ru.netology.model.PostType
@@ -15,10 +20,11 @@ import ru.netology.repository.CommercialPostRepository
 import ru.netology.repository.PostRepository
 import ru.netology.service.LocalDateTimeService
 import ru.netology.view.adapter.PostAdapter
+import java.io.IOException
 import java.time.LocalDateTime
 
 abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
-    RecyclerView.ViewHolder(view) {
+    RecyclerView.ViewHolder(view), CoroutineScope by MainScope() {
     private val userName: TextView = itemView.findViewById(R.id.userName)
     private val createTime: TextView = itemView.findViewById(R.id.createTime)
     private val geolocation: ImageButton = itemView.findViewById(R.id.geolocation)
@@ -27,6 +33,9 @@ abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
     private val commercial: ImageButton = itemView.findViewById(R.id.commercial)
 
     private val repost: RecyclerView? = itemView.findViewById(R.id.repost)
+
+    private val postRepository = PostRepository()
+    private val commercialPostRepository = CommercialPostRepository()
 
     init {
         with(itemView) {
@@ -134,15 +143,30 @@ abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
 
     fun bindRepost(post: Post) {
         if (post.type.contains(PostType.REPOST)) {
-            repost!!.visibility = View.VISIBLE
-
-            var reposted = PostRepository.get(post.original)
-            reposted = reposted ?: CommercialPostRepository.get(post.original)
+            // TODO add exception check
+            var reposted: Post? = null
+            launch {
+                try {
+                    val postResponse = postRepository.get(post.original)
+                    if (postResponse.isSuccessful) {
+                        reposted = postResponse.body()!!
+                    } else {
+                        Log.v(
+                            this::class.java.simpleName,
+                            "Can't get repost ${RetrofitClient.parseError(postResponse).error}"
+                        )
+                        repost!!.visibility = View.GONE
+                    }
+                } catch (e: IOException) {
+                    Log.v(this::class.java.simpleName, "Can't get repost", e)
+                    repost!!.visibility = View.GONE
+                }
+            }
             if (reposted != null) {
-                with(repost) {
+                with(repost!!) {
                     layoutManager = LinearLayoutManager(repost.context)
                     adapter = PostAdapter(
-                        mutableListOf(reposted.copy(inner = true))
+                        mutableListOf(reposted!!.copy(inner = true))
                     )
                 }
             }
