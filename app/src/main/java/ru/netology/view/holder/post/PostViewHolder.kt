@@ -12,10 +12,11 @@ import java.time.format.DateTimeFormatter
 
 open class PostViewHolder(postAdapter: PostAdapter, view: View) :
     ABaseViewHolder(postAdapter, view) {
+    private val viewsCount: TextView = itemView.findViewById(R.id.viewsCount)
     private val favoriteIcon: ImageButton = itemView.findViewById(R.id.favoriteIcon)
     private val favoriteCount: TextView = itemView.findViewById(R.id.favoriteCount)
-    private val commentIcon: ImageButton = itemView.findViewById(R.id.commentIcon)
-    private val commentCount: TextView = itemView.findViewById(R.id.commentCount)
+    private val repostIcon: ImageButton = itemView.findViewById(R.id.repostIcon)
+    private val repostCount: TextView = itemView.findViewById(R.id.repostCount)
     private val shareIcon: ImageButton = itemView.findViewById(R.id.shareIcon)
     private val shareCount: TextView = itemView.findViewById(R.id.shareCount)
 
@@ -43,14 +44,11 @@ open class PostViewHolder(postAdapter: PostAdapter, view: View) :
                 }
             }
 
-            commentIcon.setOnClickListener {
+            repostIcon.setOnClickListener {
                 if (adapterPosition != RecyclerView.NO_POSITION) {
                     var post = adapter.posts[adapterPosition]
 
-                    post = post.copy(
-                        comment = if (post.commentByMe) post.comment - 1 else post.comment + 1,
-                        commentByMe = !post.commentByMe
-                    )
+                    // TODO: repost API
                     adapter.posts[adapterPosition] = post
                     adapter.notifyItemChanged(adapterPosition)
                 }
@@ -89,6 +87,8 @@ open class PostViewHolder(postAdapter: PostAdapter, view: View) :
 
     override fun bind(post: Post) {
         super.bind(post)
+        bindCountView(viewsCount, post.views)
+
         bindCountView(favoriteCount, post.favorite)
         if (post.favoriteByMe) {
             favoriteIcon.setBackgroundResource(R.drawable.ic_favorite_active)
@@ -98,14 +98,7 @@ open class PostViewHolder(postAdapter: PostAdapter, view: View) :
             favoriteCount.setTextColor(this.itemView.resources.getColor(R.color.colorSecondaryText))
         }
 
-        bindCountView(commentCount, post.comment)
-        if (post.commentByMe) {
-            commentIcon.setBackgroundResource(R.drawable.ic_chat_bubble_active)
-            commentCount.setTextColor(this.itemView.resources.getColor(R.color.activeChat))
-        } else {
-            commentIcon.setBackgroundResource(R.drawable.ic_chat_bubble)
-            commentCount.setTextColor(this.itemView.resources.getColor(R.color.colorSecondaryText))
-        }
+        bindCountView(repostCount, post.repost)
 
         bindCountView(shareCount, post.share)
         if (post.shareByMe) {

@@ -21,7 +21,7 @@ android {
 
         getByName("debug") {
             isMinifyEnabled = false
-            buildConfigField("String", SERVER_URL, "\"https://kt6-backend.herokuapp.com\"")
+            buildConfigField("String", SERVER_URL, "\"http://10.0.2.2:9999\"")
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
 

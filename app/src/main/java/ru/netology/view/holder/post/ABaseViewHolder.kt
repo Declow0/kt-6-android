@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import ru.netology.activity.R
 import ru.netology.api.retrofit.RetrofitClient
 import ru.netology.model.Period
@@ -22,6 +23,7 @@ import ru.netology.service.LocalDateTimeService
 import ru.netology.view.adapter.PostAdapter
 import java.io.IOException
 import java.time.LocalDateTime
+import java.time.ZoneOffset
 
 abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
     RecyclerView.ViewHolder(view), CoroutineScope by MainScope() {
@@ -88,7 +90,7 @@ abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
             else {
                 val (period, quantity) = LocalDateTimeService.betweenInterval(
                     post.createTime,
-                    LocalDateTime.now()
+                    LocalDateTime.now(ZoneOffset.UTC)
                 )
                 when (period) {
                     Period.SECONDS -> this.itemView.resources.getQuantityString(
@@ -144,8 +146,8 @@ abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
     fun bindRepost(post: Post) {
         if (post.type.contains(PostType.REPOST)) {
             // TODO add exception check
-            var reposted: Post? = null
-            launch {
+            runBlocking {
+                var reposted: Post? = null
                 try {
                     val postResponse = postRepository.get(post.original)
                     if (postResponse.isSuccessful) {
@@ -160,18 +162,17 @@ abstract class ABaseViewHolder(val adapter: PostAdapter, view: View) :
                 } catch (e: IOException) {
                     Log.v(this::class.java.simpleName, "Can't get repost", e)
                     repost!!.visibility = View.GONE
+                } finally {
+                    if (reposted != null) {
+                        with(repost!!) {
+                            layoutManager = LinearLayoutManager(repost.context)
+                            adapter = PostAdapter(
+                                mutableListOf(reposted.copy(inner = true))
+                            )
+                        }
+                    }
                 }
             }
-            if (reposted != null) {
-                with(repost!!) {
-                    layoutManager = LinearLayoutManager(repost.context)
-                    adapter = PostAdapter(
-                        mutableListOf(reposted!!.copy(inner = true))
-                    )
-                }
-            }
-        } else {
-            repost!!.visibility = View.GONE
         }
     }
 

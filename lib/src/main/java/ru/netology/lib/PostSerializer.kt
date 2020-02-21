@@ -14,7 +14,6 @@ object PostSerializer {
             createdUser = "Google",
             content = "Используйте наш поиск!",
             favorite = 16,
-            comment = 12,
             share = 41,
             shareByMe = true,
             commercialContent = URL("https://google.com")
@@ -23,10 +22,8 @@ object PostSerializer {
             createdUser = "Microsoft",
             content = "Печатать документы легко вместе с новым Office 365",
             favorite = 69,
-            comment = 14,
             share = 21,
             favoriteByMe = true,
-            commentByMe = true,
             shareByMe = true,
             commercialContent = URL("https://products.office.com")
         )
@@ -38,7 +35,6 @@ object PostSerializer {
             content = "В чащах юга жил-был цитрус? Да, но фальшивый экземпляръ!",
             createTime = LocalDateTime.now().minus(10L, Period.MINUTES.chronoUnit),
             favorite = 15,
-            comment = 16,
             share = 12,
             favoriteByMe = true,
             location = 55.7765289 x 37.6749378,
@@ -51,8 +47,6 @@ object PostSerializer {
                 content = "Клёвое место, чтобы затусить!",
                 createTime = LocalDateTime.now().minus(2L, Period.DAYS.chronoUnit),
                 favorite = 14,
-                comment = 10,
-                commentByMe = true,
                 address = "Красный пр-т., 22, Новосибирск, Новосибирская обл., 630007"
             )
         )
@@ -62,7 +56,6 @@ object PostSerializer {
             content = "Украл пост",
             createTime = LocalDateTime.now().minus(1L, Period.MINUTES.chronoUnit),
             favorite = 14,
-            comment = 10,
             original = post.id
         )
         add(repost)
@@ -72,7 +65,6 @@ object PostSerializer {
                 content = "Украл украденный пост",
                 createTime = LocalDateTime.now().minus(1L, Period.MINUTES.chronoUnit),
                 favorite = 0,
-                comment = 14,
                 share = 10,
                 original = repost.id
             )
@@ -84,7 +76,6 @@ object PostSerializer {
                 content = "Украл пост",
                 createTime = LocalDateTime.now().minus(1L, Period.MINUTES.chronoUnit),
                 favorite = 14,
-                comment = 10,
                 original = commercialList.first().id
             )
         )

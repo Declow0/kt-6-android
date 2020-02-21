@@ -47,8 +47,8 @@ class FeedActivity : AppCompatActivity(), CoroutineScope by MainScope() {
                     toast(R.string.network_error)
                 }
 
-                loadContainer.visibility = View.GONE
                 adapter = PostAdapter(postList, commercialList)
+                loadContainer.visibility = View.GONE
             }
         }
     }

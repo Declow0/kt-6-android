@@ -10,6 +10,5 @@
     <color name="colorSecondaryText">#999999</color>
 
     <color name="activeFavorite">#F06292</color>
-    <color name="activeChat">#2196F3</color>
     <color name="activeShare">#4CAF50</color>
 </resources>

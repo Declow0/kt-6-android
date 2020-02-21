@@ -114,22 +114,22 @@
         app:layout_constraintTop_toBottomOf="@id/repost" />
 
     <TextView
-        android:id="@+id/commentCount"
+        android:id="@+id/repostCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/activity_feed_margin_inner"
         android:textColor="@color/colorSecondaryText"
-        app:layout_constraintBottom_toBottomOf="@id/commentIcon"
-        app:layout_constraintStart_toEndOf="@id/commentIcon"
+        app:layout_constraintBottom_toBottomOf="@id/repostIcon"
+        app:layout_constraintStart_toEndOf="@id/repostIcon"
         tools:text="18" />
 
     <ImageButton
-        android:id="@+id/commentIcon"
+        android:id="@+id/repostIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/activity_feed_counter_margin"
         android:layout_marginVertical="@dimen/activity_feed_margin_outer"
-        android:background="@drawable/ic_chat_bubble"
+        android:background="@drawable/ic_repost"
         app:layout_constraintEnd_toStartOf="@id/shareIcon"
         app:layout_constraintTop_toBottomOf="@id/repost" />
 
@@ -150,7 +150,27 @@
         android:layout_marginHorizontal="@dimen/activity_feed_counter_margin"
         android:layout_marginVertical="@dimen/activity_feed_margin_outer"
         android:background="@drawable/ic_favorite"
-        app:layout_constraintEnd_toStartOf="@id/commentIcon"
+        app:layout_constraintEnd_toStartOf="@id/repostIcon"
         app:layout_constraintTop_toBottomOf="@id/repost" />
+
+    <ImageButton
+        android:id="@+id/viewsIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/activity_feed_view_margin"
+        android:layout_marginVertical="@dimen/activity_feed_margin_outer"
+        android:background="@drawable/ic_views"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/repost"/>
+
+    <TextView
+        android:id="@+id/viewsCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/activity_feed_margin_inner"
+        android:textColor="@color/colorSecondaryText"
+        app:layout_constraintBottom_toBottomOf="@id/viewsIcon"
+        app:layout_constraintStart_toEndOf="@id/viewsIcon"
+        tools:text="16"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

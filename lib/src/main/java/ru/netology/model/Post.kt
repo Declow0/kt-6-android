@@ -15,12 +15,11 @@ data class Post(
     val createTime: LocalDateTime = LocalDateTime.now(),
 
     val favorite: Long = 0L,
-    val comment: Long = 0L,
+    val repost: Long = 0L,
     val share: Long = 0L,
 
     val favoriteByMe: Boolean = false,
     val shareByMe: Boolean = false,
-    val commentByMe: Boolean = false,
 
     val address: String = "",
     val location: Location? = null,
@@ -31,6 +30,7 @@ data class Post(
 
     val original: UUID? = null,
     val id: UUID = UUID.randomUUID(),
+    val views: Long = 0L,
 
     @Transient
     val inner: Boolean = false
